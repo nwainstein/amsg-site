@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News | AMSG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="https://ams.net.technion.ac.il/files/2025/11/logo_asmg_2025.png" type="image/png" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><img class="brand-logo" src="https://ams.net.technion.ac.il/files/2025/11/logo_asmg_2025.png" alt="AMSG logo" /><div class="brand-text">AMSG<span>Analog / Mixed-Signal Research Group</span></div></a>
+      <button class="nav-toggle" aria-label="Open menu">☰</button>
+      <nav class="site-nav"><ul><li><a href="index.html">Home</a></li><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="people.html">People</a></li><li><a class="active" href="news.html">News</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow reveal is-visible">News</div>
+        <h1 class="section-title reveal is-visible" style="font-size:clamp(2.4rem,5vw,4rem);">Latest updates from AMSG</h1>
+        <p class="reveal is-visible">Announcements, publications, awards, and other group highlights.</p>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container">
+        <div class="grid grid-2" id="news-page-list"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="modal" id="news-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="news-modal-title" aria-describedby="news-modal-desc">
+      <button class="modal-close" data-modal-close aria-label="Close">×</button>
+      <div class="modal-header">
+        <div class="modal-avatar"><img src="" alt="" /></div>
+        <div>
+          <h2 id="news-modal-title" class="modal-name"></h2>
+          <div class="modal-role">News</div>
+        </div>
+      </div>
+      <div class="modal-body" id="news-modal-desc">
+        <div class="modal-carousel" hidden>
+          <button class="carousel-button carousel-prev" aria-label="Previous image">‹</button>
+          <div class="carousel-frame">
+            <img class="carousel-image" src="" alt="" />
+          </div>
+          <button class="carousel-button carousel-next" aria-label="Next image">›</button>
+        </div>
+        <p class="modal-bio"></p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer"><div class="container footer-grid"><div>© <span id="year"></span> AMSG · News</div><div><a href="index.html">Home</a> · <a href="research.html">Research</a> · <a href="publications.html">Publications</a> · <a href="people.html">People</a> · <a href="news.html">News</a> · <a href="contact.html">Contact</a></div></div></footer>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

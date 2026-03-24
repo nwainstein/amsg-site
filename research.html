@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research | AMSG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="https://ams.net.technion.ac.il/files/2025/11/logo_asmg_2025.png" type="image/png" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><img class="brand-logo" src="https://ams.net.technion.ac.il/files/2025/11/logo_asmg_2025.png" alt="AMSG logo" /><div class="brand-text">AMSG<span>Analog / Mixed-Signal Research Group</span></div></a>
+      <button class="nav-toggle" aria-label="Open menu">☰</button>
+      <nav class="site-nav"><ul><li><a href="index.html">Home</a></li><li><a class="active" href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="people.html">People</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="publication-nav publication-nav--center reveal is-visible">
+          <a class="btn btn-primary" href="#research-areas">Research Areas</a>
+          <a class="btn btn-primary" href="#undergraduate-projects">Undergraduate Projects</a>
+          <a class="btn btn-primary" href="#expertise">Expertise</a>
+          <a class="btn btn-primary" href="#chip-gallery">Chip Gallery</a>
+        </div>
+        <div class="eyebrow reveal is-visible">Research Areas</div>
+        <h1 class="section-title reveal is-visible" style="font-size:clamp(2.4rem,5vw,4rem);">Advancing next-generation AI hardware by bridging device, circuit, and system innovations</h1>
+        <p class="reveal is-visible">Holistic framework combining analog/mixed-signal computing, in-memory architectures, and ultra-high-speed interconnects.</p>
+      </div>
+    </section>
+
+    <section id="research-areas" class="section compact">
+      <div class="container grid grid-2">
+        <article class="card reveal" data-topic-id="time-domain">
+          <h2>Time-Domain Computing</h2>
+          <p>Design of mixed-signal computational primitives that encode information in delay, pulse width, phase, or timing trajectories. This direction connects data conversion, low-energy processing, and hardware-efficient machine learning.</p>
+          <ul class="list-clean">
+            <li>Time-domain arithmetic and signal representation</li>
+            <li>TDC/VTC/DLL-inspired building blocks</li>
+            <li>Calibration, PVT robustness, and implementation scalability</li>
+          </ul>
+        </article>
+        <article class="card reveal delay-1" data-topic-id="in-memory">
+          <h2>In-Memory Computing</h2>
+          <p>Architectures and macros that reduce data movement by co-locating storage and computation. Emphasis is placed on mixed-signal interfaces, time-domain readout, non-volatile devices, and algorithm-aware tradeoffs.</p>
+          <ul class="list-clean">
+            <li>FeFET / NVM-compatible compute fabrics</li>
+            <li>Crossbar-inspired and CAM-based macro concepts</li>
+            <li>Energy efficiency, precision, and array-level integration</li>
+          </ul>
+        </article>
+        <article class="card reveal delay-2" data-topic-id="accelerators">
+          <h2>AI Hardware Accelerators</h2>
+          <p>Custom accelerator concepts for ANN and neuromorphic workloads, bridging circuits and system-level efficiency. The site can later expand this section with project pages, test chips, and benchmark summaries.</p>
+          <ul class="list-clean">
+            <li>Edge-oriented and energy-aware hardware</li>
+            <li>Hybrid analog/digital acceleration</li>
+            <li>Macro-to-system integration strategies</li>
+          </ul>
+        </article>
+        <article class="card reveal delay-3" data-topic-id="d2d-links">
+          <h2>Ultra-Dense D2D & C2C Links</h2>
+          <p>Short-reach transceivers and clocking techniques for chiplet and advanced-package systems. Research includes signaling efficiency, interface constraints, and link architectures suited to dense integration.</p>
+          <ul class="list-clean">
+            <li>Inverter-based and low-swing short-reach links</li>
+            <li>Clocking, forwarding strategies, and equalization tradeoffs</li>
+            <li>Design-for-test and package-aware constraints</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="undergraduate-projects" class="section compact">
+      <div class="container">
+        <div class="eyebrow reveal">Undergraduate Projects</div>
+        <h2 class="section-title reveal">Current undergraduate project opportunities.</h2>
+        <!-- <p class="section-lead reveal">Project titles, supervisors, and statuses are sourced from the official AMSG undergraduate projects page. Open any card for a short summary and project details.</p> -->
+        <div class="grid grid-2">
+          <article class="card project-card reveal" data-project-id="bnn-backend-riscv">
+            <div class="eyebrow project-status project-status--open">Open</div>
+            <h3>FeFET-Based Time-Domain Compute-in-Memory BNN Accelerator Backend Design with MIPS/RISC-V Integration</h3>
+            <p class="person-meta">Supervisor: Jeries Mattar</p>
+          </article>
+          <article class="card project-card reveal delay-1" data-project-id="ann-simulator">
+            <div class="eyebrow project-status project-status--open">Open</div>
+            <h3>Simulator for Time-Domain Compute-in-Memory ANN Accelerators</h3>
+            <p class="person-meta">Supervisor: Jeries Mattar</p>
+          </article>
+          <article class="card project-card reveal delay-2" data-project-id="fefet-ring-oscillator">
+            <div class="eyebrow project-status project-status--open">Open</div>
+            <h3>FeFET-based Ring Oscillator in 28 nm CMOS</h3>
+            <p class="person-meta">Supervisor: Jeries Mattar</p>
+          </article>
+          <article class="card project-card reveal delay-3" data-project-id="spi-ann">
+            <div class="eyebrow project-status project-status--taken">Taken</div>
+            <h3>Design of Serial Peripheral Interface (SPI) for an Artificial Neural Network Accelerator in 180 nm CMOS</h3>
+            <p class="person-meta">Supervisor: Dr. Nicolás Wainstein</p>
+          </article>
+          <article class="card project-card reveal delay-1" data-project-id="parallel-interface-ann">
+            <div class="eyebrow project-status project-status--closed">Closed</div>
+            <h3>Design of a Parallel Interface for an Artificial Neural Network Accelerator in 180 nm</h3>
+            <p class="person-meta">Supervisor: Dr. Nicolás Wainstein</p>
+          </article>
+          <article class="card project-card reveal delay-2" data-project-id="bnn-controller">
+            <div class="eyebrow project-status project-status--taken">Taken</div>
+            <h3>Controller for FeFET-Based Time-Domain Compute-in-Memory Binary Neural Networks Accelerator</h3>
+            <p class="person-meta">Supervisor: Jeries Mattar</p>
+          </article>
+          <article class="card project-card reveal delay-3" data-project-id="logic-mac">
+            <div class="eyebrow project-status project-status--taken">Taken</div>
+            <h3>FeFET-Based Time-Domain Compute-in-Memory Logic Design and MAC Implementation</h3>
+            <p class="person-meta">Supervisor: Jeries Mattar</p>
+          </article>
+          <article class="card project-card reveal delay-1" data-project-id="vtc-yflash">
+            <div class="eyebrow project-status project-status--taken">Taken</div>
+            <h3>Design of Voltage-to-Time Converter for Y-Flash Based Time-Domain Compute-in-Memory ANN Accelerator</h3>
+            <p class="person-meta">Supervisor: Jeries Mattar</p>
+          </article>
+          <article class="card project-card reveal delay-2" data-project-id="backend-design">
+            <div class="eyebrow project-status project-status--taken">Taken</div>
+            <h3>FeFET-Based Time-Domain Compute-in-Memory Backend Design</h3>
+            <p class="person-meta">Supervisor: Jeries Mattar</p>
+          </article>
+          <article class="card project-card reveal delay-3" data-project-id="tdc-dll">
+            <div class="eyebrow project-status project-status--taken">Taken</div>
+            <h3>Design of Time to Digital Converter with Delay-Locked Loop</h3>
+            <p class="person-meta">Supervisor: Jeries Mattar</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="expertise" class="section">
+      <div class="container grid grid-2">
+        <div>
+          <div class="eyebrow reveal">Supporting expertise</div>
+          <h2 class="section-title reveal">Core AMS foundations behind the projects</h2>
+          <div class="grid">
+            <div class="card reveal delay-1"><h3>Data Converters</h3><p>Architectures for sensing, digitization, timing extraction, and low-energy mixed-signal interfacing.</p></div>
+            <div class="card reveal delay-2"><h3>Clock Generation & Synchronization</h3><p>DLL/PLL-inspired techniques, phase alignment, calibration, and resilient timing generation across applications.</p></div>
+            <div class="card reveal delay-3"><h3>Measurement-Oriented Design</h3><p>Practical attention to silicon validation, interfaces, package constraints, and prototype-friendly structures.</p></div>
+          </div>
+        </div>
+        <div class="card reveal delay-2" id="chip-gallery">
+          <div class="eyebrow reveal">Chip Gallery</div>
+          <h2 class="section-title reveal">AMSG chip gallery.</h2>
+          <div class="hero-visual hero-slideshow chip-gallery-slideshow reveal is-visible" data-slideshow>
+            <div class="hero-slides" aria-label="Chip gallery slideshow">
+              <div class="hero-slide is-active" data-slide data-slide-caption="TTFS SNN Accelerator in 28 nm CMOS" aria-label="Research components image" style="background-image: url('assets/img/chips/TTFS_SNN_layout.bmp');"></div>
+              <div class="hero-slide hero-slide--contain" data-slide data-slide-caption="TD-IMC AI Macro in 28 nm CMOS" aria-label="AMSG logo" style="background-image: url('assets/img/chips/td_imc_chip.png');"></div>
+              <div class="hero-slide hero-slide--contain" data-slide data-slide-caption="TD-IMC ANN in 180 nm CMOS chip" aria-label="TD-IMC ANN in 180 nm CMOS chip" style="background-image: url('assets/img/chips/TD_IMC_Dima.png');"></div>
+            </div>
+            <div class="hero-slideshow-controls" aria-label="Chip gallery controls">
+              <button class="hero-slideshow-button" type="button" data-slide-prev aria-label="Previous chip image">‹</button>
+              <div class="hero-slideshow-dots" role="tablist" aria-label="Select chip image">
+                <button class="hero-slideshow-dot is-active" type="button" data-slide-dot data-slide-index="0" aria-label="Show first chip image" aria-selected="true"></button>
+                <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="1" aria-label="Show second chip image" aria-selected="false"></button>
+                <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="2" aria-label="Show third chip image" aria-selected="false"></button>
+                <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="3" aria-label="Show fourth chip image" aria-selected="false"></button>
+              </div>
+              <button class="hero-slideshow-button" type="button" data-slide-next aria-label="Next chip image">›</button>
+            </div>
+          </div>
+          <div class="slideshow-caption" data-slide-caption-display>Research components overview</div>
+        </div>
+      </div>
+    </section>
+
+  <div class="modal" id="topic-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="topic-modal-title" aria-describedby="topic-modal-desc">
+      <button class="modal-close" data-modal-close aria-label="Close">×</button>
+      <div class="modal-header">
+        <div class="modal-avatar"><img src="" alt="" /></div>
+        <div>
+          <h2 id="topic-modal-title" class="modal-name"></h2>
+          <div class="modal-role">Research</div>
+        </div>
+      </div>
+      <div class="modal-body" id="topic-modal-desc">
+        <p class="modal-bio"></p>
+        <div class="modal-actions">
+          <a class="btn btn-primary" href="publications.html" data-link="learn-more">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="project-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" aria-describedby="project-modal-desc">
+      <button class="modal-close" data-modal-close aria-label="Close">×</button>
+      <div class="modal-header">
+        <div>
+          <div class="eyebrow project-status" id="project-modal-status">Open</div>
+          <h2 id="project-modal-title" class="modal-name"></h2>
+          <div class="modal-role"></div>
+        </div>
+      </div>
+      <div class="modal-body" id="project-modal-desc">
+        <p class="modal-bio"></p>
+        <div class="notice modal-source-note">Titles, supervisors, and statuses are sourced from the official AMSG undergraduate projects page; summaries here are short paraphrases based on those project titles.</div>
+        <div class="modal-actions">
+          <a class="btn btn-primary" href="mailto:nico@technion.ac.il">Contact AMSG</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </main>
+
+  <footer class="footer"><div class="container footer-grid"><div>© <span id="year"></span> AMSG · Research</div><div><a href="index.html">Home</a> · <a href="research.html">Research</a> · <a href="publications.html">Publications</a> · <a href="people.html">People</a> · <a href="news.html">News</a> · <a href="contact.html">Contact</a></div></div></footer>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
