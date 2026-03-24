@@ -522,7 +522,7 @@ if (personModal) {
       name: 'Sharon Ponarovsky',
       role: 'Graduate Researcher',
       img: 'assets/img/logo_amsg_2025.png',
-      bio: 'Investigates emerging research themes in circuits and AI-oriented hardware systems.',
+      bio: 'Sharon Ponarovsky received her B.Sc. degree in Electrical Engineering from the Technion - Israel Institute of Technology, in 2024. During her B.Sc. studies, Sharon joined the Wireless Communication Solutions chip development team at Intel as a Logic Design Student Engineer. She is currently an M.Sc. student at the Andrew and Erna Faculty of Electrical and Computer Engineering,  Technion. At AMSG,  Sharon\'s research focuses on utilizing analog and mixed signal circuits to implement highly energy efficient Spiking Neural Networks (SNNs).',
       contact: {
         Email: 'sharon@technion.ac.il',
         Office: 'Viterbi ECE, Room 314',
