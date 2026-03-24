@@ -16,8 +16,23 @@
     <div class="container header-inner">
       <a class="brand" href="index.html">
         <img class="brand-logo" src="https://ams.net.technion.ac.il/files/2025/11/logo_asmg_2025.png" alt="AMSG logo" />
-        <div class="brand-text">AMSG<span>Analog / Mixed-Signal Research Group</span></div>
+        <div class="brand-text">AMSG @ Technion<span>Analog / Mixed-Signal Research Group</span></div>
       </a>
+      <div class="a11y-settings" aria-label="Accessibility settings">
+        <button id="a11y-settings-toggle" class="a11y-settings-btn" aria-expanded="false" aria-controls="a11y-settings-panel" aria-label="Open accessibility options">⚙</button>
+        <div id="a11y-settings-panel" class="a11y-settings-panel" hidden>
+          <div class="a11y-setting-group">
+            <span class="a11y-setting-label">Font size</span>
+            <button type="button" data-a11y-font="increase">A+</button>
+            <button type="button" data-a11y-font="reset">A</button>
+            <button type="button" data-a11y-font="decrease">A−</button>
+          </div>
+          <div class="a11y-setting-group">
+            <span class="a11y-setting-label">Theme</span>
+            <button id="a11y-theme-toggle" type="button" aria-pressed="false">Dark/Light</button>
+          </div>
+        </div>
+      </div>
       <button class="nav-toggle" aria-label="Open menu">☰</button>
       <nav class="site-nav">
         <ul>

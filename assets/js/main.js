@@ -318,39 +318,109 @@ const setA11yMode = (type, enabled) => {
 };
 
 const initA11yToggles = () => {
-  const headerInner = document.querySelector('.header-inner');
-  const container = document.createElement('div');
-  container.className = 'a11y-controls a11y-controls--fixed';
-  const mountTarget = headerInner || document.body;
-
-  const createButton = (type, label, title) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'a11y-btn';
-    btn.textContent = label;
-    btn.title = title;
-    const stored = localStorage.getItem(`amsg-${type}`);
-    const enabled = stored === '1';
-    btn.setAttribute('aria-pressed', enabled ? 'true' : 'false');
-
-    btn.addEventListener('click', () => {
-      const next = btn.getAttribute('aria-pressed') !== 'true';
-      btn.setAttribute('aria-pressed', next ? 'true' : 'false');
-      setA11yMode(type, next);
-    });
-
-    // Apply initial state
-    setA11yMode(type, enabled);
-    return btn;
-  };
-
-  container.append(createButton('font', 'A+', 'Toggle larger font size'));
-  container.append(createButton('contrast', 'HC', 'Toggle high contrast mode'));
-
-  mountTarget.append(container);
+  const fontStored = localStorage.getItem('amsg-font');
+  const contrastStored = localStorage.getItem('amsg-contrast');
+  setA11yMode('font', fontStored === '1');
+  setA11yMode('contrast', contrastStored === '1');
 };
 
 initA11yToggles();
+
+const initA11yPanel = () => {
+  const settingsRoot = document.querySelector('.a11y-settings');
+  const settingsToggle = document.getElementById('a11y-settings-toggle');
+  const settingsPanel = document.getElementById('a11y-settings-panel');
+  const settingsHide = document.getElementById('a11y-settings-hide');
+  const themeToggle = document.getElementById('a11y-theme-toggle');
+
+  if (!settingsRoot || !settingsToggle || !settingsPanel || !themeToggle) return;
+
+  let autoCollapseTimer = null;
+  const AUTO_COLLAPSE_MS = 8000;
+
+  const clearAutoCollapse = () => {
+    if (autoCollapseTimer) {
+      window.clearTimeout(autoCollapseTimer);
+      autoCollapseTimer = null;
+    }
+  };
+
+  const startAutoCollapse = () => {
+    clearAutoCollapse();
+    autoCollapseTimer = window.setTimeout(() => {
+      closePanel();
+    }, AUTO_COLLAPSE_MS);
+  };
+
+  const openPanel = () => {
+    settingsPanel.hidden = false;
+    settingsPanel.classList.add('open');
+    settingsRoot.classList.remove('a11y-settings--collapsed');
+    settingsToggle.setAttribute('aria-expanded', 'true');
+    startAutoCollapse();
+  };
+
+  const closePanel = () => {
+    settingsPanel.hidden = true;
+    settingsPanel.classList.remove('open');
+    settingsRoot.classList.add('a11y-settings--collapsed');
+    settingsToggle.setAttribute('aria-expanded', 'false');
+    clearAutoCollapse();
+  };
+
+  const updateThemeButton = () => {
+    const isHighContrast = document.body.classList.contains('a11y-high-contrast');
+    themeToggle.setAttribute('aria-pressed', isHighContrast ? 'true' : 'false');
+    themeToggle.textContent = isHighContrast ? 'Light mode' : 'Dark mode';
+  };
+
+  settingsToggle.addEventListener('click', (event) => {
+    const expanded = settingsToggle.getAttribute('aria-expanded') === 'true';
+    if (expanded) closePanel();
+    else openPanel();
+    event.stopPropagation();
+  });
+
+  if (settingsHide) {
+    settingsHide.addEventListener('click', (event) => {
+      closePanel();
+      event.stopPropagation();
+    });
+  }
+
+  window.addEventListener('click', (event) => {
+    if (!settingsPanel.contains(event.target) && event.target !== settingsToggle) {
+      closePanel();
+    }
+  });
+
+  settingsPanel.addEventListener('mouseenter', clearAutoCollapse);
+  settingsPanel.addEventListener('mouseleave', startAutoCollapse);
+
+  settingsPanel.querySelectorAll('[data-a11y-font]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const mode = btn.getAttribute('data-a11y-font');
+      if (mode === 'increase') setA11yMode('font', true);
+      else if (mode === 'decrease') setA11yMode('font', false);
+      else if (mode === 'reset') {
+        document.body.classList.remove('a11y-large-font');
+        localStorage.setItem('amsg-font', '0');
+      }
+      startAutoCollapse();
+    });
+  });
+
+  themeToggle.addEventListener('click', () => {
+    const active = document.body.classList.toggle('a11y-high-contrast');
+    localStorage.setItem('amsg-contrast', active ? '1' : '0');
+    updateThemeButton();
+    startAutoCollapse();
+  });
+
+  updateThemeButton();
+};
+
+initA11yPanel();
 
 /* Modal (person detail) */
 const personModal = document.getElementById('person-modal');
