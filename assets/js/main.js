@@ -823,6 +823,7 @@ if (projectModal) {
   const projectModalRole = projectModal.querySelector('.modal-role');
   const projectModalBio = projectModal.querySelector('.modal-bio');
   const projectModalStatus = document.getElementById('project-modal-status');
+  const projectModalSourceNote = projectModal.querySelector('.modal-source-note');
 
   const projectModalData = {
     'spi-ann': {
@@ -830,70 +831,80 @@ if (projectModal) {
       supervisor: 'Dr. Nicolás Wainstein',
       status: 'Taken',
       statusClass: 'project-status--taken',
-      body: 'Focuses on the design of an SPI communication interface for a 180 nm CMOS neural-network accelerator, covering digital interface behavior, integration constraints, and hardware bring-up considerations.'
+      body: 'Focuses on the design of an SPI communication interface for a 180 nm CMOS neural-network accelerator, covering digital interface behavior, integration constraints, and hardware bring-up considerations.',
+      sourceNote: 'Expertise: AMS circuits, VLSI, data converters, links, wireline'
     },
     'bnn-backend-riscv': {
       title: 'FeFET-Based Time-Domain Compute-in-Memory BNN Accelerator Backend Design with MIPS/RISC-V Integration',
       supervisor: 'Jeries Mattar',
       status: 'Open',
       statusClass: 'project-status--open',
-      body: 'Targets backend design work for a FeFET-based time-domain compute-in-memory binary neural network accelerator, with emphasis on digital integration around a MIPS or RISC-V environment.'
+      body: 'Targets backend design work for a FeFET-based time-domain compute-in-memory binary neural network accelerator, with emphasis on digital integration around a MIPS or RISC-V environment.',
+      sourceNote: 'Expertise: computer architecture, VLSI, algorithms'
     },
     'ann-simulator': {
       title: 'Simulator for Time-Domain Compute-in-Memory ANN Accelerators',
       supervisor: 'Jeries Mattar',
       status: 'Open',
       statusClass: 'project-status--open',
-      body: 'Centers on building or extending a simulator for time-domain compute-in-memory ANN accelerators to study performance, accuracy, and architecture-level tradeoffs before implementation.'
+      body: 'Centers on building or extending a simulator for time-domain compute-in-memory ANN accelerators to study performance, accuracy, and architecture-level tradeoffs before implementation.',
+      sourceNote: 'Expertise: algorithms, computer architecture'
     },
     'parallel-interface-ann': {
       title: 'Design of a Parallel Interface for an Artificial Neural Network Accelerator in 180 nm',
       supervisor: 'Dr. Nicolás Wainstein',
       status: 'Closed',
       statusClass: 'project-status--closed',
-      body: 'Covers the design of a parallel data interface for a 180 nm ANN accelerator, including digital communication structure, timing behavior, and compatibility with the accelerator datapath.'
+      body: 'Covers the design of a parallel data interface for a 180 nm ANN accelerator, including digital communication structure, timing behavior, and compatibility with the accelerator datapath.',
+      sourceNote: 'Expertise: AMS circuits, VLSI, data converters, links, wireline, high-speed'
     },
     'fefet-ring-oscillator': {
       title: 'FeFET-based Ring Oscillator in 28 nm CMOS',
       supervisor: 'Jeries Mattar',
       status: 'Open',
       statusClass: 'project-status--open',
-      body: 'Explores the design and evaluation of a FeFET-based ring oscillator in 28 nm CMOS, with likely emphasis on timing behavior, device-aware design, and circuit-level characterization.'
+      body: 'Explores the design and evaluation of a FeFET-based ring oscillator in 28 nm CMOS, with likely emphasis on timing behavior, device-aware design, and circuit-level characterization.',
+      sourceNote: 'Expertise: AMS circuits, VLSI, clocking circuits'
     },
     'bnn-controller': {
       title: 'Controller for FeFET-Based Time-Domain Compute-in-Memory Binary Neural Networks Accelerator',
       supervisor: 'Jeries Mattar',
       status: 'Taken',
       statusClass: 'project-status--taken',
-      body: 'Addresses controller design for a FeFET-based time-domain compute-in-memory BNN accelerator, coordinating operation flow, interface signaling, and system integration.'
+      body: 'Addresses controller design for a FeFET-based time-domain compute-in-memory BNN accelerator, coordinating operation flow, interface signaling, and system integration.',
+      sourceNote: 'Expertise: computer architecture, VLSI, algorithms'
     },
     'logic-mac': {
       title: 'FeFET-Based Time-Domain Compute-in-Memory Logic Design and MAC Implementation',
       supervisor: 'Jeries Mattar',
       status: 'Taken',
       statusClass: 'project-status--taken',
-      body: 'Focuses on logic-design work and multiply-accumulate building blocks for a FeFET-based time-domain compute-in-memory architecture, connecting algorithmic needs to digital and mixed-signal implementation.'
+      body: 'Focuses on logic-design work and multiply-accumulate building blocks for a FeFET-based time-domain compute-in-memory architecture, connecting algorithmic needs to digital and mixed-signal implementation.',
+      sourceNote: 'Expertise: VLSI, algorithms, computer architecture'
     },
     'vtc-yflash': {
       title: 'Design of Voltage-to-Time Converter for Y-Flash Based Time-Domain Compute-in-Memory ANN Accelerator',
       supervisor: 'Jeries Mattar',
       status: 'Taken',
       statusClass: 'project-status--taken',
-      body: 'Targets the design of a voltage-to-time converter for a Y-Flash-based time-domain compute-in-memory ANN accelerator, likely emphasizing analog front-end conversion accuracy and circuit robustness.'
+      body: 'Targets the design of a voltage-to-time converter for a Y-Flash-based time-domain compute-in-memory ANN accelerator, likely emphasizing analog front-end conversion accuracy and circuit robustness.',
+      sourceNote: 'Expertise: AMS circuits, data converters, clocking circuits'
     },
     'backend-design': {
       title: 'FeFET-Based Time-Domain Compute-in-Memory Backend Design',
       supervisor: 'Jeries Mattar',
       status: 'Taken',
       statusClass: 'project-status--taken',
-      body: 'Covers backend design work for a FeFET-based time-domain compute-in-memory project, with likely tasks around physical implementation, integration, and signoff-oriented design flow.'
+      body: 'Covers backend design work for a FeFET-based time-domain compute-in-memory project, with likely tasks around physical implementation, integration, and signoff-oriented design flow.',
+      sourceNote: 'Expertise: VLSI, computer architecture'
     },
     'tdc-dll': {
       title: 'Design of Time to Digital Converter with Delay-Locked Loop',
       supervisor: 'Jeries Mattar',
       status: 'Taken',
       statusClass: 'project-status--taken',
-      body: 'Focuses on a time-to-digital converter architecture that incorporates a delay-locked loop, combining timing-circuit concepts with calibration and measurement-oriented design.'
+      body: 'Focuses on a time-to-digital converter architecture that incorporates a delay-locked loop, combining timing-circuit concepts with calibration and measurement-oriented design.',
+      sourceNote: 'Expertise: AMS circuits, data converters, clocking circuits'
     }
   };
 
@@ -904,6 +915,7 @@ if (projectModal) {
     projectModalTitle.textContent = data.title;
     projectModalRole.textContent = `Supervisor: ${data.supervisor}`;
     projectModalBio.textContent = data.body;
+    projectModalSourceNote.textContent = data.sourceNote || 'Source: AMS Group';
 
     if (projectModalStatus) {
       projectModalStatus.textContent = data.status;
