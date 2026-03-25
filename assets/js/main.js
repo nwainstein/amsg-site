@@ -824,6 +824,7 @@ if (projectModal) {
   const projectModalBio = projectModal.querySelector('.modal-bio');
   const projectModalStatus = document.getElementById('project-modal-status');
   const projectModalSourceNote = projectModal.querySelector('.modal-source-note');
+  const projectModalContactLink = projectModal.querySelector('.modal-contact-link');
 
   const projectModalData = {
     'spi-ann': {
@@ -832,7 +833,8 @@ if (projectModal) {
       status: 'Taken',
       statusClass: 'project-status--taken',
       body: 'Focuses on the design of an SPI communication interface for a 180 nm CMOS neural-network accelerator, covering digital interface behavior, integration constraints, and hardware bring-up considerations.',
-      sourceNote: 'Expertise: AMS circuits, VLSI, data converters, links, wireline'
+      sourceNote: 'Expertise: AMS circuits, VLSI, data converters, links, wireline',
+      email: 'nico@technion.ac.il'
     },
     'bnn-backend-riscv': {
       title: 'FeFET-Based Time-Domain Compute-in-Memory BNN Accelerator Backend Design with MIPS/RISC-V Integration',
@@ -840,7 +842,8 @@ if (projectModal) {
       status: 'Open',
       statusClass: 'project-status--open',
       body: 'Targets backend design work for a FeFET-based time-domain compute-in-memory binary neural network accelerator, with emphasis on digital integration around a MIPS or RISC-V environment.',
-      sourceNote: 'Expertise: computer architecture, VLSI, algorithms'
+      sourceNote: 'Expertise: computer architecture, VLSI, algorithms',
+      email: 'jeriesmattar@campus.technion.ac.il'
     },
     'ann-simulator': {
       title: 'Simulator for Time-Domain Compute-in-Memory ANN Accelerators',
@@ -848,7 +851,8 @@ if (projectModal) {
       status: 'Open',
       statusClass: 'project-status--open',
       body: 'Centers on building or extending a simulator for time-domain compute-in-memory ANN accelerators to study performance, accuracy, and architecture-level tradeoffs before implementation.',
-      sourceNote: 'Expertise: algorithms, computer architecture'
+      sourceNote: 'Expertise: algorithms, computer architecture',
+      email: 'jeriesmattar@campus.technion.ac.il'
     },
     'parallel-interface-ann': {
       title: 'Design of a Parallel Interface for an Artificial Neural Network Accelerator in 180 nm',
@@ -856,7 +860,8 @@ if (projectModal) {
       status: 'Closed',
       statusClass: 'project-status--closed',
       body: 'Covers the design of a parallel data interface for a 180 nm ANN accelerator, including digital communication structure, timing behavior, and compatibility with the accelerator datapath.',
-      sourceNote: 'Expertise: AMS circuits, VLSI, data converters, links, wireline, high-speed'
+      sourceNote: 'Expertise: AMS circuits, VLSI, data converters, links, wireline, high-speed',
+      email: 'nico@technion.ac.il'
     },
     'fefet-ring-oscillator': {
       title: 'FeFET-based Ring Oscillator in 28 nm CMOS',
@@ -864,7 +869,8 @@ if (projectModal) {
       status: 'Open',
       statusClass: 'project-status--open',
       body: 'Explores the design and evaluation of a FeFET-based ring oscillator in 28 nm CMOS, with likely emphasis on timing behavior, device-aware design, and circuit-level characterization.',
-      sourceNote: 'Expertise: AMS circuits, VLSI, clocking circuits'
+      sourceNote: 'Expertise: AMS circuits, VLSI, clocking circuits',
+      email: 'jeriesmattar@campus.technion.ac.il'
     },
     'bnn-controller': {
       title: 'Controller for FeFET-Based Time-Domain Compute-in-Memory Binary Neural Networks Accelerator',
@@ -872,7 +878,8 @@ if (projectModal) {
       status: 'Taken',
       statusClass: 'project-status--taken',
       body: 'Addresses controller design for a FeFET-based time-domain compute-in-memory BNN accelerator, coordinating operation flow, interface signaling, and system integration.',
-      sourceNote: 'Expertise: computer architecture, VLSI, algorithms'
+      sourceNote: 'Expertise: computer architecture, VLSI, algorithms',
+      email: 'jeriesmattar@campus.technion.ac.il'
     },
     'logic-mac': {
       title: 'FeFET-Based Time-Domain Compute-in-Memory Logic Design and MAC Implementation',
@@ -880,7 +887,8 @@ if (projectModal) {
       status: 'Taken',
       statusClass: 'project-status--taken',
       body: 'Focuses on logic-design work and multiply-accumulate building blocks for a FeFET-based time-domain compute-in-memory architecture, connecting algorithmic needs to digital and mixed-signal implementation.',
-      sourceNote: 'Expertise: VLSI, algorithms, computer architecture'
+      sourceNote: 'Expertise: VLSI, algorithms, computer architecture',
+      email: 'jeriesmattar@campus.technion.ac.il'
     },
     'vtc-yflash': {
       title: 'Design of Voltage-to-Time Converter for Y-Flash Based Time-Domain Compute-in-Memory ANN Accelerator',
@@ -888,7 +896,8 @@ if (projectModal) {
       status: 'Taken',
       statusClass: 'project-status--taken',
       body: 'Targets the design of a voltage-to-time converter for a Y-Flash-based time-domain compute-in-memory ANN accelerator, likely emphasizing analog front-end conversion accuracy and circuit robustness.',
-      sourceNote: 'Expertise: AMS circuits, data converters, clocking circuits'
+      sourceNote: 'Expertise: AMS circuits, data converters, clocking circuits',
+      email: 'jeriesmattar@campus.technion.ac.il'
     },
     'backend-design': {
       title: 'FeFET-Based Time-Domain Compute-in-Memory Backend Design',
@@ -896,7 +905,8 @@ if (projectModal) {
       status: 'Taken',
       statusClass: 'project-status--taken',
       body: 'Covers backend design work for a FeFET-based time-domain compute-in-memory project, with likely tasks around physical implementation, integration, and signoff-oriented design flow.',
-      sourceNote: 'Expertise: VLSI, computer architecture'
+      sourceNote: 'Expertise: VLSI, computer architecture',
+      email: 'jeriesmattar@campus.technion.ac.il'
     },
     'tdc-dll': {
       title: 'Design of Time to Digital Converter with Delay-Locked Loop',
@@ -904,7 +914,8 @@ if (projectModal) {
       status: 'Taken',
       statusClass: 'project-status--taken',
       body: 'Focuses on a time-to-digital converter architecture that incorporates a delay-locked loop, combining timing-circuit concepts with calibration and measurement-oriented design.',
-      sourceNote: 'Expertise: AMS circuits, data converters, clocking circuits'
+      sourceNote: 'Expertise: AMS circuits, data converters, clocking circuits',
+      email: 'jeriesmattar@campus.technion.ac.il'
     }
   };
 
@@ -916,6 +927,11 @@ if (projectModal) {
     projectModalRole.textContent = `Supervisor: ${data.supervisor}`;
     projectModalBio.textContent = data.body;
     projectModalSourceNote.textContent = data.sourceNote || 'Source: AMS Group';
+
+    if (projectModalContactLink) {
+      projectModalContactLink.href = `mailto:${data.email}`;
+      projectModalContactLink.textContent = 'Contact Supervisor';
+    }
 
     if (projectModalStatus) {
       projectModalStatus.textContent = data.status;
