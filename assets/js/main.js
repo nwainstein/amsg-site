@@ -24,6 +24,23 @@ if (year) year.textContent = new Date().getFullYear();
 
 const NEWS_ITEMS = [
   {
+    id: 'acrc-retreat',
+    eyebrow: 'Event Retrospective',
+    title: 'AMSG Participated in the ACRC Retreat',
+    summary: 'AMSG participated in the ACRC retreat at Kfar Blum, a wonderful opportunity to showcase our research, hear about other research in academia and industry in Israel.',
+    details: [
+      'AMSG participated in the ACRC retreat at Kfar Blum, a wonderful opportunity to showcase our research, hear about other reseach in academia and industry in Israel.',
+      'Dima, Ofir, and Nico presented talks, while Sharon, Jeries, Dima, Yousef, and Ofir presented posters.'
+    ],
+    images: [
+      'assets/img/events/acrc_retreat/ACRC_retreat_2026.jpg',
+      'assets/img/events/acrc_retreat/Dima_ACRC_2026.jpeg',
+      'assets/img/events/acrc_retreat/Nico_ACRC_2026.jpg',
+      'assets/img/events/acrc_retreat/Ofir_ACRC_2026.jpg',
+      'assets/img/events/acrc_retreat/Sharon_ACRC_2026.jpg'
+    ]
+  },
+  {
     id: 'tcas-acceptance',
     eyebrow: 'Accepted Paper',
     title: 'Jeries’ paper accepted to IEEE TCAS I',
@@ -48,6 +65,7 @@ const NEWS_ITEMS = [
     ],
     images: []
   },
+
   {
     id: 'events-spotlight',
     eyebrow: 'Event Spotlight',
