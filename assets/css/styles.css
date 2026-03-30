@@ -170,8 +170,30 @@ img { max-width: 100%; display: block; }
   border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
 }
 .brand-mark::after { inset: 15px; }
-.brand-text { font-size: 1.45rem; font-weight: 800; }
-.brand-text span { display: block; font-size: 1rem; font-weight: 600; color: var(--muted); }
+.brand-text { font-size: 1.05rem; font-weight: 800; }
+.brand-text span { display: block; font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+
+.technion-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  padding: 4px;
+  color: #005fcc;
+}
+
+.technion-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+}
+
+body.a11y-high-contrast .technion-brand,
+body.a11y-high-contrast .technion-logo {
+  color: #ffffff;
+}
 
 .a11y-settings {
   position: fixed;

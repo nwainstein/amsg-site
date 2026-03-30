@@ -7,6 +7,35 @@ if (navToggle && siteNav) {
   });
 }
 
+const headerInner = document.querySelector('.header-inner');
+
+const updateTechnionLogo = () => {
+  const techImg = document.querySelector('.technion-logo');
+  if (!techImg) return;
+  const isDark = document.body.classList.contains('a11y-high-contrast');
+  techImg.src = isDark
+    ? 'assets/img/logo_technion_white.svg'
+    : 'assets/img/logo_technion.svg';
+};
+
+if (headerInner && !document.querySelector('.technion-brand')) {
+  const techLink = document.createElement('a');
+  techLink.className = 'technion-brand';
+  techLink.href = 'https://www.technion.ac.il';
+  techLink.target = '_blank';
+  techLink.rel = 'noopener';
+  techLink.setAttribute('aria-label', 'Technion logo');
+
+  const techImg = document.createElement('img');
+  techImg.className = 'technion-logo';
+  techImg.alt = 'Technion logo';
+
+  techLink.appendChild(techImg);
+  headerInner.appendChild(techLink);
+
+  updateTechnionLogo();
+}
+
 const revealEls = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -333,6 +362,10 @@ const setA11yMode = (type, enabled) => {
   if (!className) return;
   document.body.classList.toggle(className, enabled);
   localStorage.setItem(`amsg-${type}`, enabled ? '1' : '0');
+
+  if (type === 'contrast') {
+    updateTechnionLogo();
+  }
 };
 
 const initA11yToggles = () => {
@@ -432,10 +465,12 @@ const initA11yPanel = () => {
     const active = document.body.classList.toggle('a11y-high-contrast');
     localStorage.setItem('amsg-contrast', active ? '1' : '0');
     updateThemeButton();
+    updateTechnionLogo();
     startAutoCollapse();
   });
 
   updateThemeButton();
+  updateTechnionLogo();
 };
 
 initA11yPanel();
