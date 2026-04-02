@@ -2,12 +2,12 @@ const navToggle = document.querySelector('.nav-toggle');
 const siteNav = document.querySelector('.site-nav');
 
 if (navToggle && siteNav) {
+  navToggle.setAttribute('aria-expanded', 'false');
   navToggle.addEventListener('click', () => {
-    siteNav.classList.toggle('open');
+    const isOpen = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 }
-
-const headerInner = document.querySelector('.header-inner');
 
 const updateTechnionLogo = () => {
   const techImg = document.querySelector('.technion-logo');
@@ -18,23 +18,215 @@ const updateTechnionLogo = () => {
     : 'assets/img/logo_technion.svg';
 };
 
-if (headerInner && !document.querySelector('.technion-brand')) {
-  const techLink = document.createElement('a');
-  techLink.className = 'technion-brand';
-  techLink.href = 'https://www.technion.ac.il';
-  techLink.target = '_blank';
-  techLink.rel = 'noopener';
-  techLink.setAttribute('aria-label', 'Technion logo');
+updateTechnionLogo();
 
-  const techImg = document.createElement('img');
-  techImg.className = 'technion-logo';
-  techImg.alt = 'Technion logo';
+const SEARCH_INDEX = [
+  {
+    href: 'index.html',
+    title: 'Home',
+    keywords: [
+      'amsg',
+      'analog mixed signal research group',
+      'technion',
+      'home',
+      'overview',
+      'vision',
+      'ai hardware'
+    ]
+  },
+  {
+    href: 'research.html',
+    title: 'Research',
+    keywords: [
+      'research',
+      'projects',
+      'time-domain computing',
+      'in-memory computing',
+      'chip gallery',
+      'expertise'
+    ]
+  },
+  {
+    href: 'publications.html',
+    title: 'Publications',
+    keywords: [
+      'publications',
+      'papers',
+      'journals',
+      'conferences',
+      'talks',
+      'preprints'
+    ]
+  },
+  {
+    href: 'people.html',
+    title: 'People',
+    keywords: [
+      'people',
+      'team',
+      'students',
+      'researchers',
+      'faculty',
+      'collaborators'
+    ]
+  },
+  {
+    href: 'news.html',
+    title: 'News',
+    keywords: [
+      'news',
+      'updates',
+      'events',
+      'awards',
+      'announcements'
+    ]
+  },
+  {
+    href: 'contact.html',
+    title: 'Contact',
+    keywords: [
+      'contact',
+      'email',
+      'office',
+      'join',
+      'location'
+    ]
+  }
+];
 
-  techLink.appendChild(techImg);
-  headerInner.appendChild(techLink);
+const normalizeSearchValue = (value) => value.trim().toLowerCase();
+const normalizePathname = (pathname) => {
+  const normalized = pathname.endsWith('/') ? `${pathname}index.html` : pathname;
+  return normalized.replace(/^\.\//, '');
+};
 
-  updateTechnionLogo();
-}
+const scoreSearchEntry = (entry, query) => {
+  if (!query) return -1;
+
+  const haystack = [entry.title, ...entry.keywords].join(' ').toLowerCase();
+  if (haystack === query) return 100;
+  if (entry.title.toLowerCase() === query) return 95;
+  if (haystack.includes(query)) return 70 + Math.max(0, 20 - query.length);
+
+  const terms = query.split(/\s+/).filter(Boolean);
+  const matchedTerms = terms.filter((term) => haystack.includes(term)).length;
+  return matchedTerms ? matchedTerms * 10 : -1;
+};
+
+const findBestSearchResult = (query) => {
+  let bestEntry = SEARCH_INDEX[0];
+  let bestScore = -1;
+
+  SEARCH_INDEX.forEach((entry) => {
+    const score = scoreSearchEntry(entry, query);
+    if (score > bestScore) {
+      bestEntry = entry;
+      bestScore = score;
+    }
+  });
+
+  return bestScore >= 0 ? bestEntry : SEARCH_INDEX[0];
+};
+
+const highlightSearchQuery = (query) => {
+  if (!query || typeof window.find !== 'function') return;
+
+  window.setTimeout(() => {
+    window.find(query, false, false, true, false, true, false);
+  }, 150);
+};
+
+const initSiteSearch = () => {
+  const forms = document.querySelectorAll('[data-site-search-form]');
+  const searchToggles = document.querySelectorAll('[data-search-toggle]');
+  if (!forms.length) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const currentQuery = params.get('q') || '';
+  const currentPageText = normalizeSearchValue(document.body.innerText || '');
+
+  const closeSearches = () => {
+    document.querySelectorAll('.site-search--desktop, .site-search--mobile').forEach((form) => {
+      form.hidden = true;
+    });
+    searchToggles.forEach((toggle) => {
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  searchToggles.forEach((toggle) => {
+    const toolsRoot = toggle.closest('.header-tools');
+    const desktopForm = toolsRoot?.querySelector('.site-search--desktop');
+    const mobileForm = toolsRoot?.querySelector('.site-search--mobile');
+    if (!desktopForm && !mobileForm) return;
+
+    toggle.addEventListener('click', (event) => {
+      const activeForm = window.matchMedia('(max-width: 760px)').matches ? mobileForm : desktopForm;
+      const activeInput = activeForm?.querySelector('.site-search-input');
+      const willOpen = activeForm?.hidden;
+
+      closeSearches();
+      if (!activeForm) return;
+
+      activeForm.hidden = !willOpen;
+      toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      if (willOpen && activeInput) activeInput.focus();
+      event.stopPropagation();
+    });
+
+    [desktopForm, mobileForm].forEach((form) => {
+      form?.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
+    });
+  });
+
+  forms.forEach((form) => {
+    const input = form.querySelector('.site-search-input');
+    if (!input) return;
+
+    input.value = currentQuery;
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const rawQuery = input.value;
+      const query = normalizeSearchValue(rawQuery);
+      if (!query) return;
+
+      if (currentPageText.includes(query)) {
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('q', rawQuery.trim());
+        history.replaceState(null, '', currentUrl);
+        highlightSearchQuery(rawQuery.trim());
+        closeSearches();
+        return;
+      }
+
+      const target = findBestSearchResult(query);
+      const targetUrl = new URL(target.href, window.location.href);
+      targetUrl.searchParams.set('q', rawQuery.trim());
+
+      if (normalizePathname(targetUrl.pathname) === normalizePathname(window.location.pathname)) {
+        history.replaceState(null, '', targetUrl);
+        highlightSearchQuery(rawQuery.trim());
+        closeSearches();
+        return;
+      }
+
+      window.location.href = targetUrl.toString();
+    });
+  });
+
+  window.addEventListener('click', () => {
+    closeSearches();
+  });
+
+  if (currentQuery) {
+    highlightSearchQuery(currentQuery);
+  }
+};
+
+initSiteSearch();
 
 const revealEls = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
@@ -52,6 +244,26 @@ const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
 
 const NEWS_ITEMS = [
+  {
+    id: 'first-team-event',
+    eyebrow: 'Group Event',
+    title: 'First AMSG Team Event',
+    summary: 'On February 11, we held the first team event of AMSG!',
+    details: [
+      'On February 11, 2026 we held the first AMSG team event, bringing members together for celebration, discussion, and plans for future collaboration.'
+    ],
+    images: [
+      'assets/img/events/group_event_2026/groupevent_0.jpeg',
+      'assets/img/events/group_event_2026/groupevent_1.jpeg',
+      'assets/img/events/group_event_2026/groupevent_2.jpeg',
+      'assets/img/events/group_event_2026/groupevent_3.jpeg',
+      'assets/img/events/group_event_2026/groupevent_4.jpeg',
+      'assets/img/events/group_event_2026/groupevent_5.jpeg',
+      'assets/img/events/group_event_2026/groupevent_6.jpeg',
+      'assets/img/events/group_event_2026/groupevent_7.jpeg',
+      'assets/img/events/group_event_2026/groupevent_8.jpeg'
+    ]
+  },
   {
     id: 'acrc-retreat',
     eyebrow: 'Event Retrospective',

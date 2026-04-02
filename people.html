@@ -13,9 +13,39 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html"><img class="brand-logo" src="https://ams.net.technion.ac.il/files/2025/11/logo_asmg_2025.png" alt="AMSG logo" /><div class="brand-text">Analog/Mixed-Signal Research Group <span>Technion - Israel Institute of Technology</span></div></a>
+      <a class="brand" href="index.html"><img class="brand-logo" src="https://ams.net.technion.ac.il/files/2025/11/logo_asmg_2025.png" alt="AMSG logo" /><img class="technion-logo" src="assets/img/logo_technion.svg" alt="Technion logo" /><div class="brand-text">Analog/Mixed-Signal Research Group <span>Technion - Israel Institute of Technology</span></div></a>
       <button class="nav-toggle" aria-label="Open menu">☰</button>
       <nav class="site-nav"><ul><li><a href="index.html">Home</a></li><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a class="active" href="people.html">People</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+      <div class="header-tools" aria-label="Site tools">
+        <div class="site-search-desktop">
+          <button class="site-search-toggle" type="button" data-search-toggle aria-expanded="false" aria-label="Open search"><span aria-hidden="true">⌕</span></button>
+          <form class="site-search site-search--desktop" data-site-search-form role="search" hidden>
+            <label class="sr-only">Search site</label>
+            <input class="site-search-input" name="q" type="search" placeholder="Search site" autocomplete="off" />
+            <button class="site-search-btn" type="submit" aria-label="Search"><span aria-hidden="true">⌕</span></button>
+          </form>
+        </div>
+        <form class="site-search site-search--mobile" data-site-search-form role="search" hidden>
+          <label class="sr-only">Search site</label>
+          <input class="site-search-input" name="q" type="search" placeholder="Search site" autocomplete="off" />
+          <button class="site-search-btn" type="submit" aria-label="Search"><span aria-hidden="true">⌕</span></button>
+        </form>
+        <div class="a11y-settings" aria-label="Accessibility settings">
+          <button id="a11y-settings-toggle" class="a11y-settings-btn" aria-expanded="false" aria-controls="a11y-settings-panel" aria-label="Open accessibility options">⚙</button>
+          <div id="a11y-settings-panel" class="a11y-settings-panel" hidden>
+            <div class="a11y-setting-group">
+              <span class="a11y-setting-label">Font size</span>
+              <button type="button" data-a11y-font="increase">A+</button>
+              <button type="button" data-a11y-font="reset">A</button>
+              <button type="button" data-a11y-font="decrease">A−</button>
+            </div>
+            <div class="a11y-setting-group">
+              <span class="a11y-setting-label">Theme</span>
+              <button id="a11y-theme-toggle" type="button" aria-pressed="false">Dark/Light</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -28,7 +58,7 @@
       </div>
     </section>
 
-    <section class="section compact">
+    <section class="section compact people-section people-section--pi">
       <div class="container">
         <h2 class="section-title reveal">Principal Investigator</h2>
         <div class="grid grid-2">
@@ -43,7 +73,7 @@
       </div>
     </section>
 
-    <section class="section compact">
+    <section class="section compact people-section people-section--staff">
       <div class="container">
         <h2 class="section-title reveal">Research Staff</h2>
         <div class="grid grid-3">
@@ -69,23 +99,23 @@
       </div>
     </section>
 
-    <section class="section compact">
+    <section class="section compact people-section people-section--students">
       <div class="container">
         <h2 class="section-title reveal">Current Students</h2>
         <div class="grid grid-3">
-          <article class="card people-card reveal delay-1" data-person-id="jeries"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2023/06/jeries_photo-1701x2048.jpg" alt="Jeries Mattar" /></div><h3>Jeries Mattar</h3><div class="role">PhD Student</div><p class="person-meta">AI Hardware and Time-Domain In-Memory Computing.</p></article>
-          <article class="card people-card reveal delay-2" data-person-id="dima"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2024/09/dima-768x768.jpg" alt="Dima Saleh" /></div><h3>Dima Saleh</h3><div class="role">Graduate Student</div><p class="person-meta">AI Hardware and Time-Domain In-Memory Computing</p></article>
-          <article class="card people-card reveal delay-3" data-person-id="sharon"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2025/06/Photo673-2048x2048.jpg" alt="Sharon Ponarovsky" /></div><h3>Sharon Ponarovsky</h3><div class="role">Graduate Student</div><p class="person-meta">Neuromorphic Computing.</p></article>
-          <article class="card people-card reveal delay-4" data-person-id="yousef"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2025/03/yousef.jpg" alt="Yousef Safadi" /></div><h3>Yousef Safadi</h3><div class="role">Graduate Student</div><p class="person-meta">Die-to-die links.</p></article>
+          <article class="card people-card reveal delay-1" data-person-id="jeries"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2023/06/jeries_photo-1701x2048.jpg" alt="Jeries Mattar" /></div><h3>Jeries Mattar</h3><div class="role">PhD Student</div><p class="person-meta">AI hardware and time-domain in-memory computing.</p></article>
+          <article class="card people-card reveal delay-2" data-person-id="dima"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2024/09/dima-768x768.jpg" alt="Dima Saleh" /></div><h3>Dima Saleh</h3><div class="role">Graduate Student</div><p class="person-meta">AI hardware and time-domain in-memory computing</p></article>
+          <article class="card people-card reveal delay-3" data-person-id="sharon"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2025/06/Photo673-2048x2048.jpg" alt="Sharon Ponarovsky" /></div><h3>Sharon Ponarovsky</h3><div class="role">Graduate Student</div><p class="person-meta">Neuromorphic computing.</p></article>
+          <article class="card people-card reveal delay-4" data-person-id="yousef"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2025/03/yousef.jpg" alt="Yousef Safadi" /></div><h3>Yousef Safadi</h3><div class="role">Graduate Student</div><p class="person-meta">Ultra-dense and energy-efficient die-to-die links.</p></article>
           <article class="card people-card reveal delay-5" data-person-id="ofir"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2025/03/תמונת-פנים-581x1024.png" alt="Ofir Glick" /></div><h3>Ofir Glick</h3><div class="role">Graduate Student</div><p class="person-meta">High-speed, low-power ADCs.</p></article>   
-          <article class="card people-card reveal delay-6" data-person-id="yinon"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2026/01/yinon.jpg" alt="Yinon Geva" /></div><h3>Yinon Geva</h3><div class="role">Graduate Student</div><p class="person-meta"> Die-to-die links.</p></article>        
+          <article class="card people-card reveal delay-6" data-person-id="yinon"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2026/01/yinon.jpg" alt="Yinon Geva" /></div><h3>Yinon Geva</h3><div class="role">Graduate Student</div><p class="person-meta"> Ultra-dense and energy-efficient die-to-die links.</p></article>        
           <article class="card people-card reveal delay-7" data-person-id="daniel"><div class="avatar"><img src="https://ams.net.technion.ac.il/files/2026/03/Daniel-768x615.jpeg" alt="Daniel Komenetsky" /></div><h3>Daniel Komenetsky</h3><div class="role">Graduate Student</div><p class="person-meta">High-speed, low-power ADCs.</p></article>
        
         </div>
       </div>
     </section>
 
-    <section class="section compact">
+    <section class="section compact people-section people-section--alumni">
       <div class="container">
         <h2 class="section-title reveal">Former Students</h2>
         <div class="grid grid-3"> 
