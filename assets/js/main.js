@@ -20,7 +20,7 @@ const updateTechnionLogo = () => {
 
 updateTechnionLogo();
 
-const SEARCH_INDEX = [
+const SITE_SEARCH_PAGES = [
   {
     href: 'index.html',
     title: 'Home',
@@ -91,42 +91,36 @@ const SEARCH_INDEX = [
       'join',
       'location'
     ]
+  },
+  {
+    href: 'accessibility-information.html',
+    title: 'Accessibility',
+    keywords: [
+      'accessibility',
+      'accessibility information',
+      'accessibility statement',
+      'hebrew',
+      'נגישות',
+      'הצהרת נגישות',
+      'מידע על נגישות'
+    ]
   }
 ];
 
-const normalizeSearchValue = (value) => value.trim().toLowerCase();
+const SITE_SEARCH_SNIPPET_LENGTH = 170;
+
+const normalizeWhitespace = (value = '') => value.replace(/\s+/g, ' ').trim();
+const normalizeSearchValue = (value) => normalizeWhitespace(value).toLowerCase();
 const normalizePathname = (pathname) => {
   const normalized = pathname.endsWith('/') ? `${pathname}index.html` : pathname;
   return normalized.replace(/^\.\//, '');
 };
-
-const scoreSearchEntry = (entry, query) => {
-  if (!query) return -1;
-
-  const haystack = [entry.title, ...entry.keywords].join(' ').toLowerCase();
-  if (haystack === query) return 100;
-  if (entry.title.toLowerCase() === query) return 95;
-  if (haystack.includes(query)) return 70 + Math.max(0, 20 - query.length);
-
-  const terms = query.split(/\s+/).filter(Boolean);
-  const matchedTerms = terms.filter((term) => haystack.includes(term)).length;
-  return matchedTerms ? matchedTerms * 10 : -1;
+const getPageKey = (pathname) => {
+  const normalized = normalizePathname(pathname || '');
+  const segments = normalized.split('/').filter(Boolean);
+  return segments.length ? segments[segments.length - 1] : 'index.html';
 };
-
-const findBestSearchResult = (query) => {
-  let bestEntry = SEARCH_INDEX[0];
-  let bestScore = -1;
-
-  SEARCH_INDEX.forEach((entry) => {
-    const score = scoreSearchEntry(entry, query);
-    if (score > bestScore) {
-      bestEntry = entry;
-      bestScore = score;
-    }
-  });
-
-  return bestScore >= 0 ? bestEntry : SEARCH_INDEX[0];
-};
+const CURRENT_PAGE_KEY = getPageKey(window.location.pathname);
 
 const highlightSearchQuery = (query) => {
   if (!query || typeof window.find !== 'function') return;
@@ -136,6 +130,651 @@ const highlightSearchQuery = (query) => {
   }, 150);
 };
 
+const getSearchSnippet = (text, query) => {
+  const cleanText = normalizeWhitespace(text);
+  if (!cleanText) return '';
+
+  const normalizedText = cleanText.toLowerCase();
+  const normalizedQuery = normalizeSearchValue(query);
+  const terms = normalizedQuery.split(/\s+/).filter(Boolean);
+  let matchIndex = normalizedText.indexOf(normalizedQuery);
+
+  if (matchIndex < 0) {
+    matchIndex = terms.reduce((bestIndex, term) => {
+      const termIndex = normalizedText.indexOf(term);
+      if (termIndex < 0) return bestIndex;
+      if (bestIndex < 0) return termIndex;
+      return Math.min(bestIndex, termIndex);
+    }, -1);
+  }
+
+  if (matchIndex < 0) {
+    return cleanText.length > SITE_SEARCH_SNIPPET_LENGTH
+      ? `${cleanText.slice(0, SITE_SEARCH_SNIPPET_LENGTH).trim()}...`
+      : cleanText;
+  }
+
+  const start = Math.max(0, matchIndex - 50);
+  const end = Math.min(cleanText.length, start + SITE_SEARCH_SNIPPET_LENGTH);
+  const snippet = cleanText.slice(start, end).trim();
+  return `${start > 0 ? '...' : ''}${snippet}${end < cleanText.length ? '...' : ''}`;
+};
+
+const escapeHtml = (value = '') => value
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&#39;');
+
+const createSearchChunk = ({
+  pageHref,
+  pageTitle,
+  title,
+  text,
+  keywords = [],
+  anchor = '',
+  kind = 'detail'
+}) => {
+  const normalizedText = normalizeWhitespace(text);
+  if (!normalizedText) return null;
+
+  return {
+    pageHref,
+    pageTitle,
+    title: normalizeWhitespace(title) || pageTitle,
+    text: normalizedText,
+    keywords,
+    anchor,
+    kind
+  };
+};
+
+const collectSearchText = (element) => {
+  if (!element) return '';
+
+  const clone = element.cloneNode(true);
+  clone.querySelectorAll('script, style, button, .sr-only').forEach((node) => {
+    node.remove();
+  });
+
+  return normalizeWhitespace(clone.textContent || '');
+};
+
+const createStaticSearchChunks = () => {
+  const rawChunks = [
+    {
+      pageHref: 'index.html',
+      pageTitle: 'Home',
+      title: 'Home',
+      text: `
+        Analog Mixed Signal Research Group at the Technion. Device-to-system approach, energy-efficient AI hardware,
+        experimental focus, research vision, analog and mixed-signal computing, in-memory computing, short-reach high-speed interconnects,
+        cross-layer methodology, research grounded in silicon, energy-efficient AI hardware, meet our team, latest news from AMSG,
+        recent publications snapshot, join the group, circuits, AI hardware, wireline links.
+      `,
+      kind: 'page'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Research',
+      text: `
+        Advancing next-generation AI hardware by bridging device, circuit, and system innovations.
+        Time-Domain Computing, In-Memory Computing, AI Hardware Accelerators, Ultra-Dense D2D and C2C Links,
+        undergraduate project opportunities, core AMS foundations, chip gallery.
+      `,
+      kind: 'page'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Time-Domain Computing',
+      text: 'Time-domain arithmetic, delay, pulse width, phase, timing trajectories, TDC, VTC, DLL, calibration, PVT robustness, hardware-efficient machine learning.',
+      anchor: 'research-areas',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'In-Memory Computing',
+      text: 'In-memory computing, FeFET, NVM-compatible compute fabrics, CAM-based macro concepts, crossbar-inspired architectures, time-domain readout, mixed-signal interfaces.',
+      anchor: 'research-areas',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'AI Hardware Accelerators',
+      text: 'Custom accelerator concepts for ANN and neuromorphic workloads, edge-oriented energy-aware hardware, hybrid analog and digital acceleration, macro-to-system integration.',
+      anchor: 'research-areas',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Ultra-Dense D2D & C2C Links',
+      text: 'Short-reach transceivers, chiplet systems, dense integration, inverter-based and low-swing short-reach links, clocking, forwarding strategies, equalization, design-for-test.',
+      anchor: 'research-areas',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'FeFET-Based Time-Domain Compute-in-Memory BNN Accelerator Backend Design with MIPS/RISC-V Integration',
+      text: 'Undergraduate project. Supervisor Jeries Mattar. Open project on backend design, MIPS, RISC-V, FeFET, time-domain compute-in-memory, binary neural networks accelerator.',
+      anchor: 'undergraduate-projects',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Simulator for Time-Domain Compute-in-Memory ANN Accelerators',
+      text: 'Undergraduate project. Supervisor Jeries Mattar. Open project on simulator for time-domain compute-in-memory ANN accelerators, performance, accuracy, architecture tradeoffs.',
+      anchor: 'undergraduate-projects',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'FeFET-based Ring Oscillator in 28 nm CMOS',
+      text: 'Undergraduate project. Supervisor Jeries Mattar. Open project on FeFET-based ring oscillator, 28 nm CMOS, timing behavior, device-aware design, characterization.',
+      anchor: 'undergraduate-projects',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Design of Serial Peripheral Interface (SPI) for an Artificial Neural Network Accelerator in 180 nm CMOS',
+      text: 'Undergraduate project. Supervisor Dr. Nicolas Wainstein. Taken project on SPI communication interface for a 180 nm CMOS neural-network accelerator.',
+      anchor: 'undergraduate-projects',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Design of a Parallel Interface for an Artificial Neural Network Accelerator in 180 nm',
+      text: 'Undergraduate project. Supervisor Dr. Nicolas Wainstein. Closed project on a parallel data interface for an artificial neural network accelerator in 180 nm.',
+      anchor: 'undergraduate-projects',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Controller for FeFET-Based Time-Domain Compute-in-Memory Binary Neural Networks Accelerator',
+      text: 'Undergraduate project. Supervisor Jeries Mattar. Taken project on controller design for FeFET-based time-domain compute-in-memory binary neural networks accelerator.',
+      anchor: 'undergraduate-projects',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'FeFET-Based Time-Domain Compute-in-Memory Logic Design and MAC Implementation',
+      text: 'Undergraduate project. Supervisor Jeries Mattar. Taken project on logic design and MAC implementation for FeFET-based time-domain compute-in-memory.',
+      anchor: 'undergraduate-projects',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Design of Voltage-to-Time Converter for Y-Flash Based Time-Domain Compute-in-Memory ANN Accelerator',
+      text: 'Undergraduate project. Supervisor Jeries Mattar. Taken project on a voltage-to-time converter for Y-Flash based time-domain compute-in-memory ANN accelerator.',
+      anchor: 'undergraduate-projects',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'FeFET-Based Time-Domain Compute-in-Memory Backend Design',
+      text: 'Undergraduate project. Supervisor Jeries Mattar. Taken backend design project for a FeFET-based time-domain compute-in-memory architecture.',
+      anchor: 'undergraduate-projects',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Design of Time to Digital Converter with Delay-Locked Loop',
+      text: 'Undergraduate project. Supervisor Jeries Mattar. Taken project on time-to-digital converter architecture with delay-locked loop, timing circuits and calibration.',
+      anchor: 'undergraduate-projects',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Core AMS foundations behind the projects',
+      text: 'Time as a computational primitive, memory-compute co-design, silicon-first research approach, prototyping, validation, realistic system constraints.',
+      anchor: 'expertise',
+      kind: 'section'
+    },
+    {
+      pageHref: 'publications.html',
+      pageTitle: 'Publications',
+      title: 'Publications',
+      text: `
+        Journals, conferences, talks.
+        Reconfigurable Time-Domain In-Memory Computing Macro using CAM FeFET with Multilevel Delay Calibration in 28-nm CMOS.
+        Fast-Locking and High-Resolution DLL with Binary Search and Clock Failure Detection for Wide Frequency Ranges in 3-nm FinFET CMOS.
+        Emerging memory electronics for non-volatile radiofrequency switching technologies.
+        Nanoscale temperature sensing of electronic devices with calibrated scanning thermal microscopy.
+        Monolayer molybdenum disulfide switches for 6G communication systems.
+        Stateful Logic using Phase Change Memory.
+        Sub-Nanosecond Pulses Enable Partial Reset for Analog Phase Change Memory.
+        Indirectly Heated Switch as a Platform for Nanosecond Probing of Phase Transition Properties in Chalcogenides.
+        Uncovering Phase Change Memory Energy Limits by Sub-Nanosecond Probing of Power Dissipation Dynamics.
+        Radio Frequency Switches Based on Emerging Resistive Memory Technologies: A Survey.
+        Compact Modeling and Electro-thermal Measurements of Indirectly-Heated Phase Change RF Switches.
+        Two-terminal floating-gate transistors with a low-power memristive operation mode for analogue neuromorphic computing.
+        Adaptive Programming in Multi-Level Cell ReRAM.
+        Breaking Through the Speed-Power-Accuracy Tradeoff in ADCs using a Memristive Neuromorphic Architecture.
+        A Lumped RF Model for Nanoscale Memristive Devices and Non-Volatile Single-Pole Double-Throw Switches.
+        TIME Tunable Inductors using MEmristors.
+        DIDACTIC: A Data Intelligent Digital-to-Analog Converter with a Trainable Integrated Circuit using Memristors.
+        Ferroelectric FET-Based Time-Domain In-Memory Computing Macro with Tunable Delay Calibration in 28 nm CMOS.
+        FeFET-based Reconfigurable Voltage-to-Time Converter in 28 nm CMOS.
+        Transient Kickback Effect of Multi-Reference Pair Comparators on High-Speed ADC and Receivers.
+        A FeFET CAM-Based Time-Domain In-Memory Computing Macro with 550 ps Delay Step in 28 nm CMOS.
+        FeFET-Based Time-Domain In-Memory Computing Macro with Tunable Delay Calibration.
+        A Delay-Locked Loop with Binary Search Locking and Dead Clocks Detection.
+        Novel Clock Architecture for Ultra-Low Power DDR PHY.
+        Towards 500GHz Non-Volatile Monolayer 6G Switches.
+        Sub-Nanosecond Partial Reset for Analog Phase Change Neuromorphic Devices.
+        Electrothermal Compact Modeling of Indirectly Heated Phase Change RF Switches.
+        Nanosecond Probing of Phase Transition Properties in Chalcogenides using Embedded Heater-Thermometer.
+        A Dual-Band CMOS Low-Noise Amplifier using Memristor-Based Tunable Inductors.
+        An RF Memristor Model and Memristive Single-Pole Double-Throw Switches.
+        RF Memristor Modeling.
+        GOES-East satellite images processing in Uruguay and future perspectives.
+        Wireless image-sensor network application for population monitoring of lepidopterous insect pest in fruit crops.
+        A Wireless Sensor Network Application with Distributed Processing in the Compressed Domain.
+        Towards Energy-Efficient AI Hardware: Mixed-Signal In-Memory Computing and Ultra-Dense Die-to-Die Links.
+        The Chiplet Revolution and its Challenges on Die-to-Die Interfaces.
+        Memristor-based Reconfigurable Radiofrequency Circuits.
+        Analog and Mixed-Signal Circuit Design with Memristors.
+        Reconfigurable RF Circuits using Memristors.
+        Memristors for RF and Mixed-Signal Circuits.
+      `,
+      kind: 'page'
+    },
+    {
+      pageHref: 'publications.html',
+      pageTitle: 'Publications',
+      title: 'Journals',
+      text: 'Journal papers on time-domain in-memory computing, DLLs, radiofrequency switching, memristors, phase change memory, neuromorphic computing, ADCs, tunable inductors, and data converters.',
+      anchor: 'journals',
+      kind: 'section'
+    },
+    {
+      pageHref: 'publications.html',
+      pageTitle: 'Publications',
+      title: 'Conferences',
+      text: 'Conference papers on FeFET, time-domain in-memory computing, voltage-to-time converters, kickback in ADCs and receivers, DDR PHY, 6G switches, RF switch compact modeling, and memristor circuits.',
+      anchor: 'conferences',
+      kind: 'section'
+    },
+    {
+      pageHref: 'publications.html',
+      pageTitle: 'Publications',
+      title: 'Talks',
+      text: 'Talks on energy-efficient AI hardware, mixed-signal in-memory computing, die-to-die links, chiplets, phase transition properties in chalcogenides, memristor-based reconfigurable radiofrequency circuits, and analog and mixed-signal circuit design with memristors.',
+      anchor: 'talks',
+      kind: 'section'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'People',
+      text: `
+        Meet the AMSG Team. Principal investigator, research staff, current students, former students.
+        Nicolas Wainstein, Ilana Zilberger, Michael Sotman, Doron Orenstein, Jeries Mattar, Dima Saleh,
+        Sharon Ponarovsky, Yousef Safadi, Ofir Glick, Yinon Geva, Daniel Komenetsky, Mahmoud Mahajna.
+      `,
+      kind: 'page'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Dr. Nicolas Wainstein',
+      text: 'Assistant Professor, head of AMSG. Analog and mixed-signal integrated circuits, time-domain computing, AI hardware, die-to-die links, data converters, emerging memory technologies.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Ilana Zilberger',
+      text: 'Research Administrative Manager. Operational support, coordination, administrative management, research activities, group logistics.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Michael Sotman',
+      text: 'Lab Engineer. Maintains lab infrastructure, supports experiments, hardware setup, testing, measurement.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Doron Orenstein',
+      text: 'Researcher. Research projects, prototypes, technical development, mixed-signal and AI hardware domains.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Jeries Mattar',
+      text: 'PhD Student. AI hardware and time-domain in-memory computing.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Dima Saleh',
+      text: 'Graduate Student. AI hardware and time-domain in-memory computing.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Sharon Ponarovsky',
+      text: 'Graduate Student. Neuromorphic computing.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Yousef Safadi',
+      text: 'Graduate Student. Ultra-dense and energy-efficient die-to-die links.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Ofir Glick',
+      text: 'Graduate Student. High-speed, low-power ADCs.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Yinon Geva',
+      text: 'Graduate Student. Ultra-dense and energy-efficient die-to-die links.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Daniel Komenetsky',
+      text: 'Graduate Student. High-speed, low-power ADCs.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Mahmoud Mahajna',
+      text: 'Graduate Student. Embedded systems, neuromorphic hardware, and integrated circuits.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'news.html',
+      pageTitle: 'News',
+      title: 'News',
+      text: `
+        Latest updates from AMSG. Announcements, publications, awards, accepted papers,
+        conference papers, event retrospectives, group events, ACRC retreat, research events.
+      `,
+      kind: 'page'
+    },
+    {
+      pageHref: 'accessibility-information.html',
+      pageTitle: 'Accessibility',
+      title: 'מידע על נגישות',
+      text: `
+        הצהרת נגישות. הטכניון רואה חשיבות רבה בהנגשת אתרי האינטרנט שלו כדי לאפשר לאנשים עם מוגבלויות לגלוש באופן מיטבי.
+        רמת הנגישות. עמידה ברמת AA לפי WCAG 2.0, תמיכה בקורא מסך, ניווט במקלדת בלבד, התאמת קונטרסט,
+        תיאורים חלופיים לתכנים גרפיים, הגדלת תכנים באמצעות הדפדפן, התאמה לדפדפנים נפוצים, הימנעות מהבהובים ותנועה מהירה.
+        סיוע במקרה של בעיית נגישות. ilanapirvu@ef.technion.ac.il 077-8873231
+      `,
+      kind: 'page'
+    },
+    {
+      pageHref: 'accessibility-information.html',
+      pageTitle: 'Accessibility',
+      title: 'הצהרת נגישות',
+      text: 'הטכניון מייחס חשיבות רבה להנגשת אתרי האינטרנט שלו עבור אנשים עם מוגבלויות ומקדם תהליך מתמשך של הנגשה עבור אתרים מונגשים.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'accessibility-information.html',
+      pageTitle: 'Accessibility',
+      title: 'רמת הנגישות',
+      text: 'מחויבות לרמת AA לפי WCAG 2.0. תמיכה בקורא מסך, ניווט במקלדת, קונטרסט מתאים, תיאורים חלופיים, הגדלה בדפדפן, תאימות לדפדפנים נפוצים, הימנעות מהבהובים.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'accessibility-information.html',
+      pageTitle: 'Accessibility',
+      title: 'סיוע במקרה של בעיה',
+      text: 'במקרה של בעיית נגישות ניתן לפנות בדוא״ל ל-ilanapirvu@ef.technion.ac.il או בטלפון 077-8873231.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'contact.html',
+      pageTitle: 'Contact',
+      title: 'Contact',
+      text: `
+        Get in touch. Analog/Mixed-Signal Research Group. Technion Israel Institute of Technology.
+        Andrew and Erna Viterbi Faculty of Electrical and Computer Engineering.
+        Prospective students, collaboration and recruiting, circuits, AI hardware, high-speed interconnects.
+      `,
+      kind: 'page'
+    },
+    {
+      pageHref: 'contact.html',
+      pageTitle: 'Contact',
+      title: 'Prospective students',
+      text: 'Prospective students can contact the group with a short introduction, CV, transcript, and research interests in circuits, AI hardware, or related areas.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'contact.html',
+      pageTitle: 'Contact',
+      title: 'Collaboration and recruiting',
+      text: 'Collaborations across academia and industry in analog and mixed-signal ICs, AI hardware, and high-speed interconnects.',
+      kind: 'detail'
+    }
+  ];
+
+  return rawChunks.map((chunk) => createSearchChunk(chunk)).filter(Boolean);
+};
+
+const getSearchAnchorForElement = (element) => {
+  if (!element) return '';
+  if (element.id) return element.id;
+
+  const anchoredParent = element.closest('section[id], article[id], div[id]');
+  return anchoredParent?.id || '';
+};
+
+const extractSearchChunksFromDocument = (doc, pageMeta) => {
+  const main = doc.querySelector('main');
+  if (!main) return [];
+
+  const chunks = [];
+  const pageTitle = normalizeWhitespace(pageMeta.title || doc.title || 'AMSG');
+  const introText = collectSearchText(main);
+  const pageChunk = createSearchChunk({
+    pageHref: pageMeta.href,
+    pageTitle,
+    title: pageTitle,
+    text: introText,
+    keywords: pageMeta.keywords,
+    kind: 'page'
+  });
+
+  if (pageChunk) chunks.push(pageChunk);
+
+  const headingContainers = new Set();
+  main.querySelectorAll('h1, h2, h3').forEach((heading) => {
+    const detailContainer = heading.closest('article, .card, .timeline-item');
+    const container = detailContainer || heading.closest('section') || heading.parentElement;
+    if (container) headingContainers.add(container);
+  });
+
+  headingContainers.forEach((container) => {
+    const heading = container.querySelector('h1, h2, h3');
+    const text = collectSearchText(container);
+    if (!heading || !text) return;
+
+    const kind = container.matches('article, .card, .timeline-item') ? 'detail' : 'section';
+    const chunk = createSearchChunk({
+      pageHref: pageMeta.href,
+      pageTitle,
+      title: heading.textContent || pageTitle,
+      text,
+      keywords: pageMeta.keywords,
+      anchor: getSearchAnchorForElement(container),
+      kind
+    });
+
+    if (chunk) chunks.push(chunk);
+  });
+
+  return chunks;
+};
+
+const createDynamicSearchChunks = () => {
+  const newsPageMeta = SITE_SEARCH_PAGES.find((page) => page.href === 'news.html');
+  if (!newsPageMeta) return [];
+
+  return NEWS_ITEMS.map((item) => createSearchChunk({
+    pageHref: 'news.html',
+    pageTitle: newsPageMeta.title,
+    title: item.title,
+    text: [item.eyebrow, item.summary, ...(item.details || [])].join(' '),
+    keywords: [...newsPageMeta.keywords, item.eyebrow],
+    kind: 'detail'
+  })).filter(Boolean);
+};
+
+let siteSearchIndexPromise = null;
+
+const buildSiteSearchIndex = async () => {
+  const currentPageMeta = SITE_SEARCH_PAGES.find((pageMeta) => pageMeta.href === CURRENT_PAGE_KEY);
+  const currentPageChunks = currentPageMeta
+    ? extractSearchChunksFromDocument(document, currentPageMeta)
+    : [];
+
+  const dedupedChunks = new Map();
+  [...createStaticSearchChunks(), ...currentPageChunks, ...createDynamicSearchChunks()].forEach((chunk) => {
+    const key = [
+      chunk.pageHref,
+      chunk.anchor,
+      chunk.title,
+      chunk.text.slice(0, 180)
+    ].join('::');
+    if (!dedupedChunks.has(key)) dedupedChunks.set(key, chunk);
+  });
+
+  return [...dedupedChunks.values()];
+};
+
+const getSiteSearchIndex = () => {
+  if (!siteSearchIndexPromise) {
+    siteSearchIndexPromise = buildSiteSearchIndex();
+  }
+  return siteSearchIndexPromise;
+};
+
+const scoreSearchChunk = (chunk, query) => {
+  if (!query) return -1;
+
+  const normalizedQuery = normalizeSearchValue(query);
+  const terms = normalizedQuery.split(/\s+/).filter(Boolean);
+  const title = normalizeSearchValue(chunk.title);
+  const pageTitle = normalizeSearchValue(chunk.pageTitle);
+  const text = normalizeSearchValue(chunk.text);
+  const keywords = normalizeSearchValue(chunk.keywords.join(' '));
+
+  let score = 0;
+  let matched = false;
+
+  if (title === normalizedQuery) {
+    score += 220;
+    matched = true;
+  } else if (title.includes(normalizedQuery)) {
+    score += 150;
+    matched = true;
+  }
+
+  if (pageTitle === normalizedQuery) {
+    score += 120;
+    matched = true;
+  } else if (pageTitle.includes(normalizedQuery)) {
+    score += 70;
+    matched = true;
+  }
+
+  if (keywords.includes(normalizedQuery)) {
+    score += 60;
+    matched = true;
+  }
+
+  if (text.includes(normalizedQuery)) {
+    score += 100 - Math.min(normalizedQuery.length, 40);
+    matched = true;
+  }
+
+  terms.forEach((term) => {
+    if (title.includes(term)) score += 24;
+    if (pageTitle.includes(term)) score += 12;
+    if (keywords.includes(term)) score += 10;
+    if (text.includes(term)) score += 7;
+  });
+
+  if (!matched && !terms.some((term) => title.includes(term) || text.includes(term) || keywords.includes(term))) {
+    return -1;
+  }
+
+  if (chunk.pageHref === CURRENT_PAGE_KEY) score += 35;
+  if (chunk.kind === 'detail') score += 18;
+  if (chunk.kind === 'section') score += 8;
+  if (chunk.kind === 'page') score -= 10;
+
+  const breadthPenalty = Math.min(Math.floor(chunk.text.length / 800), 10);
+  return score - breadthPenalty;
+};
+
+const findSiteSearchResults = (chunks, query) => {
+  const seen = new Set();
+
+  return chunks
+    .map((chunk) => ({
+      ...chunk,
+      score: scoreSearchChunk(chunk, query),
+      snippet: getSearchSnippet(chunk.text, query)
+    }))
+    .filter((chunk) => chunk.score >= 0)
+    .sort((left, right) => {
+      if (right.score !== left.score) return right.score - left.score;
+      if (left.pageHref === CURRENT_PAGE_KEY && right.pageHref !== CURRENT_PAGE_KEY) return -1;
+      if (right.pageHref === CURRENT_PAGE_KEY && left.pageHref !== CURRENT_PAGE_KEY) return 1;
+      return left.title.localeCompare(right.title);
+    })
+    .filter((chunk) => {
+      const key = `${chunk.pageHref}::${chunk.anchor}::${chunk.title}::${chunk.snippet}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+};
+
+const buildSearchResultUrl = (result, rawQuery) => {
+  const targetUrl = new URL(result.pageHref, window.location.href);
+  targetUrl.searchParams.set('q', rawQuery.trim());
+  if (result.anchor) targetUrl.hash = result.anchor;
+  return targetUrl;
+};
+
 const initSiteSearch = () => {
   const forms = document.querySelectorAll('[data-site-search-form]');
   const searchToggles = document.querySelectorAll('[data-search-toggle]');
@@ -143,11 +782,45 @@ const initSiteSearch = () => {
 
   const params = new URLSearchParams(window.location.search);
   const currentQuery = params.get('q') || '';
-  const currentPageText = normalizeSearchValue(document.body.innerText || '');
+
+  const ensureResultsPanel = (form) => {
+    let panel = form.querySelector('.site-search-results');
+    if (panel) return panel;
+
+    panel = document.createElement('div');
+    panel.className = 'site-search-results';
+    panel.hidden = true;
+    panel.setAttribute('role', 'listbox');
+    panel.setAttribute('aria-label', 'Site search results');
+    form.appendChild(panel);
+    return panel;
+  };
+
+  const hideFormResults = (form) => {
+    const panel = form.querySelector('.site-search-results');
+    if (!panel) return;
+    panel.hidden = true;
+    panel.innerHTML = '';
+  };
+
+  const setFormResultsState = (form, html) => {
+    const panel = ensureResultsPanel(form);
+    panel.innerHTML = html;
+    panel.hidden = false;
+  };
+
+  const syncSearchInputs = (value, sourceInput) => {
+    forms.forEach((form) => {
+      const input = form.querySelector('.site-search-input');
+      if (!input || input === sourceInput) return;
+      input.value = value;
+    });
+  };
 
   const closeSearches = () => {
     document.querySelectorAll('.site-search--desktop, .site-search--mobile').forEach((form) => {
       form.hidden = true;
+      hideFormResults(form);
     });
     searchToggles.forEach((toggle) => {
       toggle.setAttribute('aria-expanded', 'false');
@@ -186,34 +859,104 @@ const initSiteSearch = () => {
     if (!input) return;
 
     input.value = currentQuery;
+    let searchRunId = 0;
 
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
+    const runSearch = async () => {
+      const runId = ++searchRunId;
       const rawQuery = input.value;
       const query = normalizeSearchValue(rawQuery);
-      if (!query) return;
+      syncSearchInputs(rawQuery, input);
 
-      if (currentPageText.includes(query)) {
-        const currentUrl = new URL(window.location.href);
-        currentUrl.searchParams.set('q', rawQuery.trim());
-        history.replaceState(null, '', currentUrl);
-        highlightSearchQuery(rawQuery.trim());
-        closeSearches();
-        return;
+      if (!query) {
+        hideFormResults(form);
+        return [];
       }
 
-      const target = findBestSearchResult(query);
-      const targetUrl = new URL(target.href, window.location.href);
-      targetUrl.searchParams.set('q', rawQuery.trim());
+      setFormResultsState(form, '<div class="site-search-results-empty">Searching...</div>');
+      const results = findSiteSearchResults(await getSiteSearchIndex(), rawQuery);
+      if (runId !== searchRunId) return [];
 
-      if (normalizePathname(targetUrl.pathname) === normalizePathname(window.location.pathname)) {
+      if (!results.length) {
+        setFormResultsState(form, '<div class="site-search-results-empty">No matches found.</div>');
+        return [];
+      }
+
+      const resultItems = results.map((result) => {
+        const resultUrl = buildSearchResultUrl(result, rawQuery);
+        const pageLabel = result.pageHref === CURRENT_PAGE_KEY
+          ? `${result.pageTitle} · Current page`
+          : result.pageTitle;
+
+        return `
+          <a class="site-search-result" href="${escapeHtml(resultUrl.toString())}" data-search-result-link>
+            <div class="site-search-result-page">${escapeHtml(pageLabel)}</div>
+            <div class="site-search-result-title">${escapeHtml(result.title)}</div>
+            <div class="site-search-result-snippet">${escapeHtml(result.snippet)}</div>
+          </a>
+        `;
+      }).join('');
+
+      setFormResultsState(
+        form,
+        `<div class="site-search-results-meta">${results.length} result${results.length === 1 ? '' : 's'}</div>${resultItems}`
+      );
+
+      form.querySelectorAll('[data-search-result-link]').forEach((link, index) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          const result = results[index];
+          const targetUrl = buildSearchResultUrl(result, rawQuery);
+
+          if (result.pageHref === CURRENT_PAGE_KEY) {
+            history.replaceState(null, '', targetUrl);
+            if (result.anchor) {
+              document.getElementById(result.anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            highlightSearchQuery(rawQuery.trim());
+            closeSearches();
+            return;
+          }
+
+          window.location.href = targetUrl.toString();
+        });
+      });
+
+      return results;
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const results = await runSearch();
+      if (!results.length) return;
+
+      const targetUrl = buildSearchResultUrl(results[0], input.value);
+      if (results[0].pageHref === CURRENT_PAGE_KEY) {
         history.replaceState(null, '', targetUrl);
-        highlightSearchQuery(rawQuery.trim());
+        if (results[0].anchor) {
+          document.getElementById(results[0].anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        highlightSearchQuery(input.value.trim());
         closeSearches();
         return;
       }
 
       window.location.href = targetUrl.toString();
+    });
+
+    input.addEventListener('input', () => {
+      runSearch();
+    });
+
+    input.addEventListener('focus', () => {
+      if (normalizeSearchValue(input.value)) {
+        runSearch();
+      }
+    });
+
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeSearches();
+      }
     });
   });
 
@@ -223,6 +966,16 @@ const initSiteSearch = () => {
 
   if (currentQuery) {
     highlightSearchQuery(currentQuery);
+  }
+
+  if (typeof window.requestIdleCallback === 'function') {
+    window.requestIdleCallback(() => {
+      getSiteSearchIndex();
+    });
+  } else {
+    window.setTimeout(() => {
+      getSiteSearchIndex();
+    }, 300);
   }
 };
 
