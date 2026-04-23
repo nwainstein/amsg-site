@@ -998,6 +998,18 @@ if (year) year.textContent = new Date().getFullYear();
 
 const NEWS_ITEMS = [
   {
+    id: 'newcas-2026-acceptance',
+    eyebrow: 'Accepted Paper',
+    title: 'Paper accepted to IEEE NEWCAS 2026',
+    summary: 'Great news! Hanaa and Jeries\' paper has been accepted to IEEE NEWCAS 2026. The paper presents a tunable FeFET-based voltage-to-time conveter (VTC) in 28 nm CMOS.',
+    details: [
+      'Great news! Hanaa and Jeries\' paper has been accepted to IEEE NEWCAS 2026. The paper presents a tunable FeFET-based voltage-to-time conveter (VTC) in 28 nm CMOS.'
+    ],
+    ctaLabel: 'Read the preprint',
+    ctaHref: 'https://lnkd.in/dwKsBqAd',
+    images: []
+  },
+  {
     id: 'first-team-event',
     eyebrow: 'Group Event',
     title: 'First AMSG Team Event',
@@ -1105,6 +1117,14 @@ const NEWS_ITEMS = [
 ];
 
 const NEWS_ITEMS_MAP = Object.fromEntries(NEWS_ITEMS.map((item) => [item.id, item]));
+const INDEX_NEWS_PREVIEW_IDS = [
+  'newcas-2026-acceptance',
+  'acrc-retreat',
+  'tcas-acceptance'
+];
+const INDEX_NEWS_PREVIEW_ITEMS = INDEX_NEWS_PREVIEW_IDS
+  .map((id) => NEWS_ITEMS_MAP[id])
+  .filter(Boolean);
 
 const renderNewsCards = (container, items, options = {}) => {
   if (!container) return;
@@ -1138,7 +1158,7 @@ const renderNewsCards = (container, items, options = {}) => {
 };
 
 renderNewsCards(document.getElementById('news-page-list'), NEWS_ITEMS);
-renderNewsCards(document.getElementById('index-news-preview'), NEWS_ITEMS.slice(0, 3), { preview: true });
+renderNewsCards(document.getElementById('index-news-preview'), INDEX_NEWS_PREVIEW_ITEMS, { preview: true });
 
 const teamCarousel = document.querySelector('[data-team-carousel]');
 if (teamCarousel) {

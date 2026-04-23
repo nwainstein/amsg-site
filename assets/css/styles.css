@@ -600,14 +600,11 @@ body.a11y-high-contrast .a11y-controls .a11y-btn[aria-pressed="true"] {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(5,10,18,0.2), rgba(5,10,18,0.56)),
-    radial-gradient(circle at 52% 42%, rgba(116,183,255,0.18), transparent 23%),
-    radial-gradient(circle at 70% 70%, rgba(199,164,107,0.14), transparent 17%);
+  background: none;
 }
 .hero-slide--contain {
   background-size: contain;
-  background-color: rgba(6, 12, 20, 0.96);
+  background-color: transparent;
 }
 .hero-overlay {
   z-index: 1;
