@@ -66,40 +66,49 @@
 
     <section id="research-areas" class="section compact">
       <div class="container grid grid-2">
-        <article class="card reveal" data-topic-id="time-domain">
-          <h2>Time-Domain Computing</h2>
-          <p>Design of mixed-signal computational primitives that encode information in delay, pulse width, phase, or timing trajectories. This direction connects data conversion, low-energy processing, and hardware-efficient machine learning.</p>
-          <ul class="list-clean">
-            <li>Time-domain arithmetic and signal representation</li>
-            <li>TDC/VTC/DLL-inspired building blocks</li>
-            <li>Calibration, PVT robustness, and implementation scalability</li>
-          </ul>
-        </article>
-        <article class="card reveal delay-1" data-topic-id="in-memory">
+        <article class="card reveal" data-topic-id="in-memory">
           <h2>In-Memory Computing</h2>
-          <p>Architectures and macros that reduce data movement by co-locating storage and computation. Emphasis is placed on mixed-signal interfaces, time-domain readout, non-volatile devices, and algorithm-aware tradeoffs.</p>
+          <p>Architectures and macros that reduce data movement by co-locating storage and computation. Research emphasizes mixed-signal and time-domain interfaces, non-volatile memory technologies, and algorithm-aware design tradeoffs that enable scalable and energy-efficient compute fabrics.</p>
           <ul class="list-clean">
-            <li>FeFET / NVM-compatible compute fabrics</li>
-            <li>Crossbar-inspired and CAM-based macro concepts</li>
+            <li>Compute-in-memory architectures using CMOS and beyond-CMOS memory technologies</li>
+            <li>Time-domain sensing, readout, and compute interfaces</li>
             <li>Energy efficiency, precision, and array-level integration</li>
           </ul>
         </article>
-        <article class="card reveal delay-2" data-topic-id="accelerators">
+        <article class="card reveal delay-1" data-topic-id="accelerators">
           <h2>AI Hardware Accelerators</h2>
-          <p>Custom accelerator concepts for ANN and neuromorphic workloads, bridging circuits and system-level efficiency. The site can later expand this section with project pages, test chips, and benchmark summaries.</p>
+          <p>Custom accelerator architectures for ANN and neuromorphic workloads, spanning circuit techniques, compute macros, and system-level integration. This direction includes mixed-signal and time-domain hardware approaches tailored for energy-efficient edge intelligence and next-generation AI systems.</p>
           <ul class="list-clean">
-            <li>Edge-oriented and energy-aware hardware</li>
-            <li>Hybrid analog/digital acceleration</li>
-            <li>Macro-to-system integration strategies</li>
+            <li>Edge-oriented and energy-aware accelerator design</li>
+            <li>Hybrid analog/digital and time-domain acceleration</li>
+            <li>Macro-to-system integration and workload-aware optimization</li>
           </ul>
         </article>
-        <article class="card reveal delay-3" data-topic-id="d2d-links">
-          <h2>Ultra-Dense D2D & C2C Links</h2>
-          <p>Short-reach transceivers and clocking techniques for chiplet and advanced-package systems. Research includes signaling efficiency, interface constraints, and link architectures suited to dense integration.</p>
+        <article class="card reveal delay-2" data-topic-id="data-converters">
+          <h2>Data Converters</h2>
+          <p>Mixed-signal interfaces that translate information across voltage, current, digital, and time domains. Research includes both conventional and application-specific converter architectures, with emphasis on energy efficiency, calibration, and integration with sensing and compute macros.</p>
           <ul class="list-clean">
-            <li>Inverter-based and low-swing short-reach links</li>
-            <li>Clocking, forwarding strategies, and equalization tradeoffs</li>
-            <li>Design-for-test and package-aware constraints</li>
+            <li>ADC/DAC architectures for mixed-signal systems</li>
+            <li>Voltage-to-time and time-to-digital conversion techniques</li>
+            <li>Linearity, noise, bandwidth, and calibration tradeoffs</li>
+          </ul>
+        </article>
+        <article class="card reveal delay-3" data-topic-id="clock-generation">
+          <h2>Clock Generation Circuits</h2>
+          <p>Timing-generation and synchronization circuits for mixed-signal, compute, and high-speed link applications. Research focuses on robust clock synthesis, alignment, and distribution techniques that sustain performance under jitter, mismatch, and PVT variability.</p>
+          <ul class="list-clean">
+            <li>PLL/DLL-based clock synthesis and timing recovery</li>
+            <li>Multi-phase generation, phase alignment, and deskew</li>
+            <li>Low-jitter design, calibration, and implementation robustness</li>
+          </ul>
+        </article>
+        <article class="card reveal delay-4" data-topic-id="d2d-links">
+          <h2>Ultra-Dense D2D & C2C Links</h2>
+          <p>Energy-efficient interface circuits for high-speed die-to-die and chip-to-chip communication in chiplet-based systems. Research includes signaling and receiver architectures, clock/reference generation and distribution, crosstalk-aware operation, and calibration techniques for robust communication over ultra-dense short-reach channels.</p>
+          <ul class="list-clean">
+            <li>Low-swing and inverter-based short-reach signaling</li>
+            <li>Equalization, clocking, and reference distribution strategies</li>
+            <li>Crosstalk mitigation, calibration, and package-aware design</li>
           </ul>
         </article>
       </div>
@@ -188,6 +197,7 @@
               <div class="hero-slide hero-slide--contain" data-slide data-slide-caption="Neuromorphic Data Converter in 180 nm CMOS" aria-label="Neuromorphic Data Converter in 180 nm CMOS" style="background-image: url('assets/img/chips/ndc-tower.png');"></div>
               <div class="hero-slide hero-slide--contain" data-slide data-slide-caption="TD-IMC AI Accelerator in 180 nm CMOS using Y-Flash" aria-label="TD-IMC AI Accelerator in 180 nm CMOS using Y-Flash" style="background-image: url('assets/img/chips/td-imc-tower.png');"></div>
               <div class="hero-slide hero-slide--contain" data-slide data-slide-caption="Y-Flash memory array in 180 nm CMOS" aria-label="Y-Flash memory array in 180 nm CMOS" style="background-image: url('assets/img/chips/yflash_array.png');"></div>
+              <div class="hero-slide hero-slide--contain" data-slide data-slide-caption="4 GS/s Time-Interleaved Reusable Binary Search ADC in 28 nm CMOS" aria-label="4 GS/s Time-Interleaved Reusable Binary Search ADC in 28 nm CMOS" style="background-image: url('assets/img/chips/TI_RBSADC.jpg');"></div>
             </div>
             <div class="hero-slideshow-controls" aria-label="Chip gallery controls">
               <button class="hero-slideshow-button" type="button" data-slide-prev aria-label="Previous chip image">‹</button>
@@ -199,6 +209,7 @@
                 <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="4" aria-label="Show fifth chip image" aria-selected="false"></button>
                 <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="5" aria-label="Show sixth chip image" aria-selected="false"></button>
                 <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="6" aria-label="Show seventh chip image" aria-selected="false"></button>
+                <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="7" aria-label="Show eighth chip image" aria-selected="false"></button>
               </div>
               <button class="hero-slideshow-button" type="button" data-slide-next aria-label="Next chip image">›</button>
             </div>

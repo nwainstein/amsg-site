@@ -221,7 +221,7 @@ const createStaticSearchChunks = () => {
       title: 'Research',
       text: `
         Advancing next-generation AI hardware by bridging device, circuit, and system innovations.
-        Time-Domain Computing, In-Memory Computing, AI Hardware Accelerators, Ultra-Dense D2D and C2C Links,
+        In-Memory Computing, AI Hardware Accelerators, Data Converters, Clock Generation Circuits, Ultra-Dense D2D and C2C Links,
         undergraduate project opportunities, core AMS foundations, chip gallery.
       `,
       kind: 'page'
@@ -229,16 +229,8 @@ const createStaticSearchChunks = () => {
     {
       pageHref: 'research.html',
       pageTitle: 'Research',
-      title: 'Time-Domain Computing',
-      text: 'Time-domain arithmetic, delay, pulse width, phase, timing trajectories, TDC, VTC, DLL, calibration, PVT robustness, hardware-efficient machine learning.',
-      anchor: 'research-areas',
-      kind: 'detail'
-    },
-    {
-      pageHref: 'research.html',
-      pageTitle: 'Research',
       title: 'In-Memory Computing',
-      text: 'In-memory computing, FeFET, NVM-compatible compute fabrics, CAM-based macro concepts, crossbar-inspired architectures, time-domain readout, mixed-signal interfaces.',
+      text: 'Architectures and macros that reduce data movement by co-locating storage and computation, including mixed-signal and time-domain interfaces, non-volatile memory technologies, and algorithm-aware design tradeoffs.',
       anchor: 'research-areas',
       kind: 'detail'
     },
@@ -246,7 +238,23 @@ const createStaticSearchChunks = () => {
       pageHref: 'research.html',
       pageTitle: 'Research',
       title: 'AI Hardware Accelerators',
-      text: 'Custom accelerator concepts for ANN and neuromorphic workloads, edge-oriented energy-aware hardware, hybrid analog and digital acceleration, macro-to-system integration.',
+      text: 'Custom accelerator architectures for ANN and neuromorphic workloads spanning circuit techniques, compute macros, and system-level integration with mixed-signal and time-domain approaches.',
+      anchor: 'research-areas',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Data Converters',
+      text: 'Mixed-signal interfaces across voltage, current, digital, and time domains, including ADC/DAC architectures, voltage-to-time and time-to-digital techniques, and calibration tradeoffs.',
+      anchor: 'research-areas',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Clock Generation Circuits',
+      text: 'Timing-generation and synchronization circuits for mixed-signal, compute, and high-speed link applications with robust synthesis, phase alignment, deskew, and low-jitter operation.',
       anchor: 'research-areas',
       kind: 'detail'
     },
@@ -1787,27 +1795,33 @@ if (topicModal) {
   const topicModalLearnMoreLink = topicModal.querySelector('[data-link="learn-more"]');
 
   const topicModalData = {
-    'time-domain': {
-      title: 'Time-Domain Computing',
-      body: 'Design of mixed-signal computational primitives that encode information in delay, pulse width, phase, or timing trajectories. This direction connects data conversion, low-energy processing, and hardware-efficient machine learning. Topics include time-domain arithmetic, TDC/VTC/DLL-inspired building blocks, and techniques for calibration, PVT robustness, and implementation scalability.',
-      learnMoreHref: 'publications.html',
-      learnMoreLabel: 'Learn more'
-    },
     'in-memory': {
       title: 'In-Memory Computing',
-      body: 'Architectures and macros that reduce data movement by co-locating storage and computation. Emphasis is placed on mixed-signal interfaces, time-domain readout, non-volatile devices, and algorithm-aware tradeoffs. Key themes include FeFET/NVM-compatible compute fabrics, crossbar-inspired and CAM-based macro concepts, and energy/precision/integration tradeoffs.',
+      body: 'Architectures and macros that reduce data movement by co-locating storage and computation. Research emphasizes mixed-signal and time-domain interfaces, non-volatile memory technologies, and algorithm-aware design tradeoffs that enable scalable and energy-efficient compute fabrics. Focus areas include compute-in-memory architectures using CMOS and beyond-CMOS memory technologies, time-domain sensing/readout/compute interfaces, and energy-efficiency/precision/array-level integration tradeoffs.',
       learnMoreHref: 'publications.html',
       learnMoreLabel: 'Learn more'
     },
     'accelerators': {
       title: 'AI Hardware Accelerators',
-      body: 'Custom accelerator concepts for ANN and neuromorphic workloads, bridging circuits and system-level efficiency. The theme can expand with project pages, test chips, and benchmark summaries. Focus areas include edge-oriented energy-aware hardware, hybrid analog/digital acceleration, and macro-to-system integration strategies.',
+      body: 'Custom accelerator architectures for ANN and neuromorphic workloads, spanning circuit techniques, compute macros, and system-level integration. This direction includes mixed-signal and time-domain hardware approaches tailored for energy-efficient edge intelligence and next-generation AI systems. Focus areas include edge-oriented and energy-aware accelerator design, hybrid analog/digital and time-domain acceleration, and macro-to-system integration with workload-aware optimization.',
+      learnMoreHref: 'publications.html',
+      learnMoreLabel: 'Learn more'
+    },
+    'data-converters': {
+      title: 'Data Converters',
+      body: 'Mixed-signal interfaces that translate information across voltage, current, digital, and time domains. Research includes both conventional and application-specific converter architectures, with emphasis on energy efficiency, calibration, and integration with sensing and compute macros. Topics include ADC/DAC architectures for mixed-signal systems, voltage-to-time and time-to-digital conversion techniques, and linearity/noise/bandwidth/calibration tradeoffs.',
+      learnMoreHref: 'publications.html',
+      learnMoreLabel: 'Learn more'
+    },
+    'clock-generation': {
+      title: 'Clock Generation Circuits',
+      body: 'Timing-generation and synchronization circuits for mixed-signal, compute, and high-speed link applications. Research focuses on robust clock synthesis, alignment, and distribution techniques that sustain performance under jitter, mismatch, and PVT variability. Core directions include PLL/DLL-based clock synthesis and timing recovery, multi-phase generation with phase alignment and deskew, and low-jitter design with calibration and implementation robustness.',
       learnMoreHref: 'publications.html',
       learnMoreLabel: 'Learn more'
     },
     'd2d-links': {
       title: 'Ultra-Dense D2D & C2C Links',
-      body: 'Short-reach transceivers and clocking techniques for chiplet and advanced-package systems. Research includes signaling efficiency, interface constraints, and link architectures suited to dense integration. Topics cover inverter-based and low-swing short-reach links, clocking/forwarding/equalization tradeoffs, and design-for-test and package-aware constraints.',
+      body: 'Energy-efficient interface circuits for high-speed die-to-die and chip-to-chip communication in chiplet-based systems. Research includes signaling and receiver architectures, clock/reference generation and distribution, crosstalk-aware operation, and calibration techniques for robust communication over ultra-dense short-reach channels. Topics cover low-swing and inverter-based signaling, equalization/clocking/reference distribution strategies, and crosstalk mitigation with package-aware calibration.',
       learnMoreHref: 'publications.html',
       learnMoreLabel: 'Learn more'
     }
