@@ -1006,6 +1006,20 @@ if (year) year.textContent = new Date().getFullYear();
 
 const NEWS_ITEMS = [
   {
+    id: 'ti-adc-tapeout-28nm',
+    eyebrow: 'Tapeout',
+    title: 'Time-Interleaved ADC Taped Out in 28 nm CMOS',
+    summary: 'In collaboration with the ACTO Lab at the Technion, we taped out a time-interleaved reusable binary-search ADC. The project is led by Ofir Glick.',
+    details: [
+      'In collaboration with the ACTO Lab at the Technion, we taped out a time-interleaved reusable binary-search ADC in 28 nm CMOS.',
+      'The project is led by Ofir Glick.',
+      'Congratulations, Ofir!'
+    ],
+    images: [
+      'assets/img/chips/TI_RBSADC.jpg'
+    ]
+  },
+  {
     id: 'newcas-2026-acceptance',
     eyebrow: 'Accepted Paper',
     title: 'Paper accepted to IEEE NEWCAS 2026',
@@ -1126,9 +1140,9 @@ const NEWS_ITEMS = [
 
 const NEWS_ITEMS_MAP = Object.fromEntries(NEWS_ITEMS.map((item) => [item.id, item]));
 const INDEX_NEWS_PREVIEW_IDS = [
+  'ti-adc-tapeout-28nm',
   'newcas-2026-acceptance',
-  'acrc-retreat',
-  'tcas-acceptance'
+  'acrc-retreat'
 ];
 const INDEX_NEWS_PREVIEW_ITEMS = INDEX_NEWS_PREVIEW_IDS
   .map((id) => NEWS_ITEMS_MAP[id])
