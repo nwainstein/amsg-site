@@ -1521,7 +1521,7 @@ if (personModal) {
       bio: 'Jeries received his B.Sc. in Electrical Engineering and Physics from the Technion in 2021 and is currently pursuing an M.Sc. in Electrical and Computer Engineering. His research focuses on mixed-signal computing for neural networks, exploring analog techniques for modern deep learning architectures, including time-domain compute and in-memory compute.',
       contact: {
         Email: 'jeriesmattar@campus.technion.ac.il',
-        Office: '405 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
+        Office: '406 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
         Phone: ''
       },
       links: {
@@ -1540,7 +1540,7 @@ if (personModal) {
       bio: 'Yousef received his B.Sc. in Electrical Engineering from the Technion and is currently a graduate student focused on die-to-die (D2D) interfaces. He is interested in analog/mixed-signal design.',
       contact: {
         Email: 'yousefsafadi@campus.technion.ac.il',
-        Office: '405 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
+        Office: '406 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
         Phone: ''
       },
       links: {
@@ -1598,7 +1598,7 @@ if (personModal) {
       bio: 'Daniel Komenetsky is an Analog IC Design Tech-Lead at Samsung Semiconductor, specializing in the design of advanced analog and mixed-signal integrated circuits for mobile imaging systems. His work focuses on power management architectures, low-noise voltage regulators, switched-capacitor circuits, and data converters, including column-parallel single-slope ADCs and current-steering DACs. He has experience leading full design cycles, from architecture and specifications definition through post-silicon validation. His current academic interests include high-speed time-based data converters for serial link applications, bridging advanced circuit research with silicon-proven industry practice.',
       contact: {
         Email: 'd.komenetsky@campus.technion.ac.il',
-        Office: '405 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
+        Office: '406 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
         Phone: ''
       },
       links: {
@@ -1617,7 +1617,7 @@ if (personModal) {
       bio: 'Mahmoud is a M.Sc research student from the University of Politecnico di Torino in Italy, majoring in Electronics Engineering - Embedded Systems. He received his B.Sc degree in Electronics and Communication Engineering from Politecnico di Torino. He conducted a 6-month internship at The National Metrology Institute of Italy (INRiM) on the topic of Superconducting Single Photon Detectors. His current research interests are Computer Architecture, Neuromorphic Computing, Integrated Circuits and VLSI Systems.',
       contact: {
         Email: 'm-mahmoud@campus.technion.ac.il',
-        Office: '411 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
+        Office: '406 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
         Phone: ''
       },
       links: {
@@ -1636,7 +1636,7 @@ if (personModal) {
       bio: 'Dima received her B.Sc. in Electrical Engineering from the Technion and is currently a graduate student at AMSG, specializing in time-domain in-memory computing (TD‑IMC). Her research interests include advancements in mixed-signal integrated circuit design.',
       contact: {
         Email: 'dima.al@campus.technion.ac.il',
-        Office: '411 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
+        Office: '406 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
         Phone: ''
       },
       links: {
@@ -1655,8 +1655,8 @@ if (personModal) {
       bio: 'Sharon Ponarovsky received her B.Sc. degree in Electrical Engineering from the Technion - Israel Institute of Technology, in 2024. During her B.Sc. studies, Sharon joined the Wireless Communication Solutions chip development team at Intel as a Logic Design Student Engineer. She is currently an M.Sc. student at the Andrew and Erna Faculty of Electrical and Computer Engineering,  Technion. At AMSG,  Sharon\'s research focuses on utilizing analog and mixed signal circuits to implement highly energy efficient Spiking Neural Networks (SNNs).',
       contact: {
         Email: 'sharon@technion.ac.il',
-        Office: 'Viterbi ECE, Room 314',
-        Phone: '+972 4 234 5680'
+        Office: '406 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
+        //Phone: '+972 4 234 5680'
       },
       links: {
         scholar: 'https://scholar.google.com',
@@ -1693,7 +1693,7 @@ if (personModal) {
       bio: 'Michael Sotman received his B.Sc. (1996) and M.Sc. (2007) degree in Electrical Engineering from the Technion - Israel Institute of Technology. M.Sc. thesis is about On-die power distribution under supervision of Prof. Avinoam Kolodny. He has more than 25 years of experience in high-tech (Intel, Zoran, Mobileye) in various fields, mostly in Signal and Power Integrity design/validation on chip/platform level.',
       contact: {
         Email: 'michael@technion.ac.il',
-        Office: '411 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
+        Office: '410 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
         Phone: '+972 4 234 5682'  
       },
       links: {
@@ -1712,7 +1712,7 @@ if (personModal) {
       bio: 'Doron Orenstein is a senior computer architect with extensive industry experience and a parallel track in STEM education and science communication. He spent more than three decades at Intel as a lead engineer and architect and is an inventor on multiple patents spanning processor and instruction-set/microarchitecture topics. He also earned an M.A. at the Technion (2020), where his work addressed integrating authentic hi-tech problems into secondary-school mathematics teaching, connecting workplace modeling practices with school mathematics. He also serves as a reporter and content contributor on mathematics and technology for “Madaa Gadol Baktana” (Little Big Science).',
       contact: {
         Email: 'doron@technion.ac.il',
-        Office: '411 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
+        Office: '410 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
         Phone: '+972 4 234 5683'
       },
       links: {
