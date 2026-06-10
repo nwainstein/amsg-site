@@ -1006,6 +1006,20 @@ if (year) year.textContent = new Date().getFullYear();
 
 const NEWS_ITEMS = [
   {
+    id: 'icsee-2026-presentations-jerusalem',
+    eyebrow: 'Conference Presentation',
+    title: 'AMSG Students Presented at ICSEE 2026 in Jerusalem',
+    summary: 'Ofir, Jeries, and Hanaa presented their research at ICSEE 2026 in Jerusalem. Congratulations to all three on an excellent presentation.',
+    details: [
+      'Ofir, Jeries, and Hanaa presented their research at ICSEE 2026 in Jerusalem.',
+      'Congratulations to all three on an excellent presentation and strong representation of AMSG.'
+    ],
+    images: [
+      'assets/img/events/icsee_2026/Jeries_ICSEE_2026.jpeg',
+      'assets/img/events/icsee_2026/Ofir_ICSEE_2026.jpeg'
+    ]
+  },
+  {
     id: 'ti-adc-tapeout-28nm',
     eyebrow: 'Tapeout',
     title: 'Time-Interleaved ADC Taped Out in 28 nm CMOS',
