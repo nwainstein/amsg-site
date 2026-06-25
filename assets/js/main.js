@@ -1006,6 +1006,20 @@ if (year) year.textContent = new Date().getFullYear();
 
 const NEWS_ITEMS = [
   {
+    id: 'newcas-2026-best-student-paper-award',
+    eyebrow: 'Award',
+    title: 'Hanaa and Jeries win Best Student Paper Award at IEEE NEWCAS 2026',
+    summary: 'Great news! Hanaa and Jeries received the Best Student Paper Award at IEEE NEWCAS 2026, held in Canada, for their paper titled “Ferroelectric FET-Based Reconfigurable Voltage-to-Time Converter in 28 nm CMOS.”',
+    details: [
+      'Great news! Hanaa and Jeries received the Best Student Paper Award at IEEE NEWCAS 2026, held in Canada, for their paper titled “Ferroelectric FET-Based Reconfigurable Voltage-to-Time Converter in 28 nm CMOS.”',
+      'Congratulations to Hanaa, Jeries, and all our collaborators on this excellent achievement!'
+    ],
+    images: [
+      'assets/img/events/newcas_2026/WhatsApp%20Image%202026-06-25%20at%2000.12.16.jpeg',
+      'assets/img/events/newcas_2026/WhatsApp%20Image%202026-06-25%20at%2000.12.45.jpeg'
+    ]
+  },
+  {
     id: 'icsee-2026-presentations-jerusalem',
     eyebrow: 'Conference Presentation',
     title: 'AMSG Students Presented at ICSEE 2026 in Jerusalem',
@@ -1154,9 +1168,9 @@ const NEWS_ITEMS = [
 
 const NEWS_ITEMS_MAP = Object.fromEntries(NEWS_ITEMS.map((item) => [item.id, item]));
 const INDEX_NEWS_PREVIEW_IDS = [
-  'ti-adc-tapeout-28nm',
-  'newcas-2026-acceptance',
-  'acrc-retreat'
+  'newcas-2026-best-student-paper-award',
+  'icsee-2026-presentations-jerusalem',
+  'ti-adc-tapeout-28nm'
 ];
 const INDEX_NEWS_PREVIEW_ITEMS = INDEX_NEWS_PREVIEW_IDS
   .map((id) => NEWS_ITEMS_MAP[id])
