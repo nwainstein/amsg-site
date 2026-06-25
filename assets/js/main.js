@@ -1,6 +1,32 @@
 const navToggle = document.querySelector('.nav-toggle');
 const siteNav = document.querySelector('.site-nav');
 
+const initBackToTopButton = () => {
+  if (document.querySelector('.back-to-top')) return;
+
+  const backToTopButton = document.createElement('button');
+  backToTopButton.className = 'back-to-top';
+  backToTopButton.type = 'button';
+  backToTopButton.setAttribute('aria-label', 'Back to top');
+  backToTopButton.setAttribute('title', 'Back to top');
+  backToTopButton.innerHTML = '&uarr;';
+
+  const updateVisibility = () => {
+    const isVisible = window.scrollY > 280;
+    backToTopButton.classList.toggle('is-visible', isVisible);
+  };
+
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+  updateVisibility();
+  document.body.appendChild(backToTopButton);
+};
+
+initBackToTopButton();
+
 if (navToggle && siteNav) {
   navToggle.setAttribute('aria-expanded', 'false');
   navToggle.addEventListener('click', () => {
