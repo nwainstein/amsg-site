@@ -1032,6 +1032,19 @@ if (year) year.textContent = new Date().getFullYear();
 
 const NEWS_ITEMS = [
   {
+    id: 'four-new-chip-designs-taped-out-week',
+    eyebrow: 'Tapeout',
+    title: '25/6/2026 - Four New Chip Designs Taped Out This Week',
+    summary: 'This week, our group completed the tape-out of four new chip designs across two CMOS technologies: two designs in 180 nm and two designs in 28 nm.',
+    details: [
+      'This week, our group completed the tape-out of four new chip designs across two CMOS technologies: two designs in 180 nm and two designs in 28 nm.',
+      'The 180 nm tape-outs include an ANN accelerator and a neuromorphic data converter based on Y-Flash technology. These designs advance our work on emerging-memory-based computing and data conversion for energy-efficient AI hardware.',
+      'The 28 nm tape-outs include a time-domain in-memory computing accelerator and an SNN prototype. These chips explore time-domain and spiking-neural-network circuit techniques for next-generation edge-AI systems.',
+      'Congratulations to all the students (Jeries, Sharon, Dima, and Mahmoud) and collaborators involved in this intense and exciting tape-out effort. We look forward to receiving and testing the silicon.'
+    ],
+    images: []
+  },
+  {
     id: 'newcas-2026-best-student-paper-award',
     eyebrow: 'Award',
     title: 'Hanaa and Jeries win Best Student Paper Award at IEEE NEWCAS 2026',
@@ -1194,9 +1207,9 @@ const NEWS_ITEMS = [
 
 const NEWS_ITEMS_MAP = Object.fromEntries(NEWS_ITEMS.map((item) => [item.id, item]));
 const INDEX_NEWS_PREVIEW_IDS = [
+  'four-new-chip-designs-taped-out-week',
   'newcas-2026-best-student-paper-award',
-  'icsee-2026-presentations-jerusalem',
-  'ti-adc-tapeout-28nm'
+  'icsee-2026-presentations-jerusalem'
 ];
 const INDEX_NEWS_PREVIEW_ITEMS = INDEX_NEWS_PREVIEW_IDS
   .map((id) => NEWS_ITEMS_MAP[id])
