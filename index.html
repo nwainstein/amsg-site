@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="c6osTBanrL1QWqeQEmYPURUtdV-WDmI7w0rqEJQH9Zs" />
@@ -10,13 +11,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="icon" href="https://ams.net.technion.ac.il/files/2025/11/logo_asmg_2025.png" type="image/png" />
+  <link rel="icon" href="assets/img/logo_asmg_2025.png" type="image/png" />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
-        <img class="brand-logo" src="https://ams.net.technion.ac.il/files/2025/11/logo_asmg_2025.png" alt="AMSG logo" />
+        <img class="brand-logo" src="assets/img/logo_asmg_2025.png" alt="AMSG logo" />
         <img class="technion-logo" src="assets/img/logo_technion.svg" alt="Technion logo" />
         <div class="brand-text">Analog/Mixed-Signal Research Group <span>Technion - Israel Institute of Technology</span></div>
       </a>
@@ -88,16 +89,18 @@
         </div> 
         <div class="hero-visual hero-slideshow reveal delay-2" data-slideshow>
           <div class="hero-slides" aria-label="Research highlights slideshow">
-            <div class="hero-slide is-active" data-slide aria-label="Research components image" style="background-image: url('assets/img/web_research_components.jpg');"></div>
-            <div class="hero-slide hero-slide--contain" data-slide aria-label="AMSG logo" style="background-image: url('assets/img/logo_asmg_2025.png');"></div>
-            <div class="hero-slide hero-slide--contain" data-slide aria-label="AMSG team" style="background-image: url('assets/img/team_2025.jpeg');"></div>
+            <div class="hero-slide is-active" data-slide aria-label="The AMSG group, 2026" style="background-image: url('assets/img/hero_group_2026.jpg');"></div>
+            <div class="hero-slide" data-slide aria-label="Overview of AMSG research directions in energy-efficient AI hardware" style="background-image: url('assets/img/hero_research.jpg');"></div>
+            <div class="hero-slide hero-slide--figure" data-slide aria-label="Die micrograph of a time-domain in-memory computing macro in 28 nm CMOS" style="background-image: url('assets/img/hero_chip.jpg');"></div>
+            <div class="hero-slide" data-slide aria-label="AMSG group outing, 2026" style="background-image: url('assets/img/hero_groupevent.jpg');"></div>
           </div>
           <div class="hero-slideshow-controls" aria-label="Slideshow controls">
             <button class="hero-slideshow-button" type="button" data-slide-prev aria-label="Previous slide">‹</button>
             <div class="hero-slideshow-dots" role="tablist" aria-label="Select hero slide">
-              <button class="hero-slideshow-dot is-active" type="button" data-slide-dot data-slide-index="0" aria-label="Show research components image" aria-selected="true"></button>
-              <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="1" aria-label="Show AMSG logo" aria-selected="false"></button>
-              <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="2" aria-label="Show AMSG team" aria-selected="false"></button>
+              <button class="hero-slideshow-dot is-active" type="button" data-slide-dot data-slide-index="0" aria-label="Show the AMSG group photo" aria-selected="true"></button>
+              <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="1" aria-label="Show the research overview" aria-selected="false"></button>
+              <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="2" aria-label="Show the chip die micrograph" aria-selected="false"></button>
+              <button class="hero-slideshow-dot" type="button" data-slide-dot data-slide-index="3" aria-label="Show the group outing photo" aria-selected="false"></button>
             </div>
             <button class="hero-slideshow-button" type="button" data-slide-next aria-label="Next slide">›</button>
           </div>
@@ -157,8 +160,10 @@
               <div class="team-carousel-frame">
                 <img
                   class="team-carousel-image"
-                  src="https://ams.net.technion.ac.il/files/2022/11/nico_photo_web.jpeg"
+                  src="assets/img/people/nico_web.jpg"
                   alt="Dr. Nicolás (Nico) Wainstein"
+                  loading="lazy"
+                  decoding="async"
                   data-team-image
                 />
                 <div class="team-carousel-caption">
@@ -170,6 +175,8 @@
                   class="team-carousel-image"
                   src="https://ams.net.technion.ac.il/files/2023/06/jeries_photo-1701x2048.jpg"
                   alt="Jeries Mattar"
+                  loading="lazy"
+                  decoding="async"
                   data-team-image
                 />
                 <div class="team-carousel-caption">
@@ -179,14 +186,9 @@
             </div>
             <button class="team-carousel-button" type="button" data-team-next aria-label="Next team member">›</button>
           </div>
-          <div class="team-carousel-dots" role="tablist" aria-label="Select team members">
-            <button class="team-carousel-dot is-active" type="button" data-team-dot data-team-index="0" aria-label="Show first team pair" aria-selected="true"></button>
-            <button class="team-carousel-dot" type="button" data-team-dot data-team-index="2" aria-label="Show second team pair" aria-selected="false"></button>
-            <button class="team-carousel-dot" type="button" data-team-dot data-team-index="4" aria-label="Show third team pair" aria-selected="false"></button>
-            <button class="team-carousel-dot" type="button" data-team-dot data-team-index="6" aria-label="Show fourth team pair" aria-selected="false"></button>
-            <button class="team-carousel-dot" type="button" data-team-dot data-team-index="8" aria-label="Show fifth team pair" aria-selected="false"></button>
-            <button class="team-carousel-dot" type="button" data-team-dot data-team-index="10" aria-label="Show sixth team pair" aria-selected="false"></button>
-          </div>
+          <!-- Dots are generated from the teamMembers array in assets/js/main.js
+               so that adding a person never desyncs them. -->
+          <div class="team-carousel-dots" role="tablist" aria-label="Select team members" data-team-dots></div>
           <div class="team-carousel-actions">
             <a class="btn btn-primary" href="people.html">People</a>
           </div>

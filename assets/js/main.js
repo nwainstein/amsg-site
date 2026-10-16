@@ -385,7 +385,9 @@ const createStaticSearchChunks = () => {
       pageTitle: 'Publications',
       title: 'Publications',
       text: `
-        Journals, conferences, talks.
+        Preprints, journals, conferences, talks.
+        Energy and Scaling Limits of Phase-Change Memory.
+        A FeFET Voltage-to-Time Converter With Offset Trim by Programmed Multilevel State in 28-nm CMOS.
         Reconfigurable Time-Domain In-Memory Computing Macro using CAM FeFET with Multilevel Delay Calibration in 28-nm CMOS.
         Fast-Locking and High-Resolution DLL with Binary Search and Clock Failure Detection for Wide Frequency Ranges in 3-nm FinFET CMOS.
         Emerging memory electronics for non-volatile radiofrequency switching technologies.
@@ -428,6 +430,14 @@ const createStaticSearchChunks = () => {
         Memristors for RF and Mixed-Signal Circuits.
       `,
       kind: 'page'
+    },
+    {
+      pageHref: 'publications.html',
+      pageTitle: 'Publications',
+      title: 'Preprints',
+      text: 'Preprints on arXiv covering phase-change memory energy and scaling limits, and FeFET voltage-to-time converters with multilevel offset trim in 28 nm CMOS.',
+      anchor: 'preprints',
+      kind: 'section'
     },
     {
       pageHref: 'publications.html',
@@ -1032,6 +1042,40 @@ if (year) year.textContent = new Date().getFullYear();
 
 const NEWS_ITEMS = [
   {
+    id: 'nvmts-2026-tokyo-poster',
+    eyebrow: 'Conference Presentation',
+    title: '14/10/2026 - Jeries Presented at IEEE NVMTS 2026 in Tokyo',
+    summary: 'Jeries presented his work at the IEEE Non-Volatile Memory Technology Symposium (NVMTS) 2026 in Tokyo, Japan, with a poster titled “A Switch-Mode FeFET Time-Domain Macro for In-Memory Nearest-Neighbor Search in 28 nm CMOS.”',
+    details: [
+      'Jeries presented his work at the IEEE Non-Volatile Memory Technology Symposium (NVMTS) 2026, held in Tokyo, Japan.',
+      'His poster, titled “A Switch-Mode FeFET Time-Domain Macro for In-Memory Nearest-Neighbor Search in 28 nm CMOS,” presents a FeFET-based time-domain macro that performs nearest-neighbor search directly in memory.',
+      'NVMTS is one of the premier conferences on memory technologies, with invited talks from world leaders in the field and selected contributed work presented as posters. Congratulations, Jeries!'
+    ],
+    images: []
+  },
+  {
+    id: 'iia-applied-research-d2d-grant',
+    eyebrow: 'Grant',
+    title: '16/9/2026 - IIA Applied Research in Academia Grant for Ultra-Dense Die-to-Die Links',
+    summary: 'AMSG received an Israel Innovation Authority (IIA) Applied Research in Academia grant for the project “Ultra-Dense and Ultra-Energy-Efficient Die-to-Die Links.”',
+    details: [
+      'We are glad to announce that AMSG received an Israel Innovation Authority (IIA) grant under the Applied Research in Academia program, for the project “Ultra-Dense and Ultra-Energy-Efficient Die-to-Die Links.”',
+      'Thanks to the IIA for supporting this work.'
+    ],
+    images: []
+  },
+  {
+    id: 'dima-best-ta-award',
+    eyebrow: 'Award',
+    title: '28/8/2026 - Dima Wins Best TA Award',
+    summary: 'Congratulations to Dima Saleh, who received the Best TA Award in recognition of her teaching contribution.',
+    details: [
+      'Congratulations to Dima Saleh, who received the Best TA Award in recognition of her outstanding teaching contribution.',
+      'Well deserved, Dima!'
+    ],
+    images: []
+  },
+  {
     id: 'four-new-chip-designs-taped-out-week',
     eyebrow: 'Tapeout',
     title: '25/6/2026 - Four New Chip Designs Taped Out This Week',
@@ -1207,9 +1251,9 @@ const NEWS_ITEMS = [
 
 const NEWS_ITEMS_MAP = Object.fromEntries(NEWS_ITEMS.map((item) => [item.id, item]));
 const INDEX_NEWS_PREVIEW_IDS = [
-  'four-new-chip-designs-taped-out-week',
-  'newcas-2026-best-student-paper-award',
-  'icsee-2026-presentations-jerusalem'
+  'nvmts-2026-tokyo-poster',
+  'iia-applied-research-d2d-grant',
+  'dima-best-ta-award'
 ];
 const INDEX_NEWS_PREVIEW_ITEMS = INDEX_NEWS_PREVIEW_IDS
   .map((id) => NEWS_ITEMS_MAP[id])
@@ -1255,7 +1299,7 @@ if (teamCarousel) {
     {
       name: 'Dr. Nicolás (Nico) Wainstein',
       role: 'Assistant Professor · Head of AMSG',
-      image: 'https://ams.net.technion.ac.il/files/2022/11/nico_photo_web.jpeg'
+      image: 'assets/img/people/nico_web.jpg'
     },
     {
       name: 'Jeries Mattar',
@@ -1306,19 +1350,54 @@ if (teamCarousel) {
       name: 'Daniel Komenetsky',
       role: 'Graduate Student',
       image: 'https://ams.net.technion.ac.il/files/2026/03/Daniel-768x615.jpeg'
+    },
+    {
+      name: 'Maysam Simaan',
+      role: 'Graduate Student',
+      image: 'assets/img/people/maysam_web.jpg'
+    },
+    {
+      name: 'Premsagar Dhote',
+      role: 'Exploratory Research Student',
+      image: 'assets/img/people/premsagar_web.jpg'
     }
   ];
   const teamImages = Array.from(teamCarousel.querySelectorAll('[data-team-image]'));
   const teamNames = Array.from(teamCarousel.querySelectorAll('[data-team-name]'));
-  const teamDots = Array.from(document.querySelectorAll('[data-team-dot]'));
   const teamPrev = teamCarousel.querySelector('[data-team-prev]');
   const teamNext = teamCarousel.querySelector('[data-team-next]');
   let activeTeamIndex = 0;
   let teamTimer = null;
   const teamStep = 2;
 
+  // Build the dots from teamMembers so adding a person can never desync them.
+  const teamDotsHost = document.querySelector('[data-team-dots]');
+  if (teamDotsHost) {
+    teamDotsHost.innerHTML = '';
+    for (let i = 0; i < teamMembers.length; i += teamStep) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'team-carousel-dot' + (i === 0 ? ' is-active' : '');
+      dot.dataset.teamDot = '';
+      dot.dataset.teamIndex = String(i);
+      dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      const shown = teamMembers
+        .slice(i, i + teamStep)
+        .map(member => member.name)
+        .join(' and ');
+      dot.setAttribute('aria-label', `Show ${shown}`);
+      teamDotsHost.appendChild(dot);
+    }
+  }
+  const teamDots = Array.from(document.querySelectorAll('[data-team-dot]'));
+
+  const teamPageCount = Math.ceil(teamMembers.length / teamStep);
+
   const setActiveTeamMember = (index) => {
-    activeTeamIndex = (index + teamMembers.length) % teamMembers.length;
+    // Snap to a whole page so the active index always matches a dot, even when
+    // the member count is not a multiple of teamStep.
+    const page = Math.round(index / teamStep);
+    activeTeamIndex = (((page % teamPageCount) + teamPageCount) % teamPageCount) * teamStep;
 
     teamImages.forEach((teamImage, imageIndex) => {
       const member = teamMembers[(activeTeamIndex + imageIndex) % teamMembers.length];
@@ -1564,7 +1643,7 @@ if (personModal) {
     nico: {
       name: 'Dr. Nicolás (Nico) Wainstein',
       role: 'Assistant Professor · Head of AMSG',
-      img: 'https://ams.net.technion.ac.il/files/2022/11/nico_photo_web.jpeg',
+      img: 'assets/img/people/nico_web.jpg',
       bio: 'Nicolás Wainstein is an Assistant Professor at the Andrew and Erna Viterbi Faculty of Electrical Engineering and the Robert J. Shillman Career Advancement Chair, Technion – Israel Institute of Technology. He received his B.Sc. in Electrical Engineering from Universidad de la República, Uruguay, in 2014, and his Ph.D. in Electrical Engineering from the Technion – Israel Institute of Technology in 2021. From 2021 to 2024, he was an Analog/Mixed-Signal Design Technical Lead Engineer at Intel, Israel, working on high-speed parallel wireline links, such as DDR and die-to-die (D2D) communication. His current research focuses on analog/mixed-signal integrated circuit design, with an emphasis on high-speed I/O, data converters, and hardware for machine learning. Previously, he worked on the development, fabrication, and modeling of high-performance PCM RF switches, as well as the circuit design and fabrication of reconfigurable RF front-end circuits based on these devices. Nicolás was the recipient of several prestigious awards, including the 2021 Hershel Rich Innovation Award, the 2020 IEEE Electron Devices Society Ph.D. Student Fellowship, the 2020 Yablonovitch Research Prize, and the 2020 RBNI Prize for Excellence in Nanoscience and Nanotechnology. He also received the RBNI Scholarship in 2020, the 2019 Jury Award for Outstanding Students, and the Excellence Scholarship from the Andrew and Erna Viterbi Faculty of Electrical Engineering, Technion, in 2018, 2019, and 2020.',
       contact: {
         Email: 'nico@technion.ac.il',
@@ -1584,7 +1663,7 @@ if (personModal) {
     jeries: {
       name: 'Jeries Mattar',
       role: 'Graduate Researcher',
-      img: 'assets/img/logo_amsg_2025.png',
+      img: 'https://ams.net.technion.ac.il/files/2023/06/jeries_photo-1701x2048.jpg',
       bio: 'Jeries received his B.Sc. in Electrical Engineering and Physics from the Technion in 2021 and is currently pursuing an M.Sc. in Electrical and Computer Engineering. His research focuses on mixed-signal computing for neural networks, exploring analog techniques for modern deep learning architectures, including time-domain compute and in-memory compute.',
       contact: {
         Email: 'jeriesmattar@campus.technion.ac.il',
@@ -1603,7 +1682,7 @@ if (personModal) {
     yousef: {
       name: 'Yousef Safadi',
       role: 'Graduate Researcher',
-      img: 'assets/img/logo_amsg_2025.png',
+      img: 'https://ams.net.technion.ac.il/files/2025/03/yousef.jpg',
       bio: 'Yousef received his B.Sc. in Electrical Engineering from the Technion and is currently a graduate student focused on die-to-die (D2D) interfaces. He is interested in analog/mixed-signal design.',
       contact: {
         Email: 'yousefsafadi@campus.technion.ac.il',
@@ -1622,7 +1701,7 @@ if (personModal) {
     ofir: {
       name: 'Ofir Glick',
       role: 'Graduate Researcher',
-      img: 'assets/img/logo_amsg_2025.png',
+      img: 'https://ams.net.technion.ac.il/files/2025/03/%D7%AA%D7%9E%D7%95%D7%A0%D7%AA-%D7%A4%D7%A0%D7%99%D7%9D-581x1024.png',
       bio: 'Ofir received his B.Sc. in Electrical Engineering from the Technion in 2024 and is currently an M.Sc. student working with Prof. Ariel Cohen and Dr. Nicolás Wainstein. He was previously an analog circuit designer at Cisco focusing on high-speed, low-power ADCs with digital calibration and mixed-signal verification.',
       contact: {
         Email: 'ofirglick@campus.technion.ac.il',
@@ -1642,7 +1721,7 @@ if (personModal) {
     yinon: {
       name: 'Yinon Geva',
       role: 'Graduate Researcher',
-      img: 'assets/img/logo_amsg_2025.png',
+      img: 'https://ams.net.technion.ac.il/files/2026/01/yinon.jpg',
       bio: 'Yinon received his B.Sc. in Electrical and Computer Engineering from the Technion in 2024 and is currently an M.Sc. student. He is also a full-time digital IP design engineer at Intel, specializing in design-for-testability (DFT). His research focuses on high-speed, low-power die-to-die interfaces, CMOS circuit design, tapeout, and silicon measurement.',
       contact: {
         Email: 'yinongeva@campus.technion.ac.il',
@@ -1680,7 +1759,7 @@ if (personModal) {
     mahmoud: {
       name: 'Mahmoud Mahajna',
       role: 'Graduate Researcher',
-      img: 'assets/img/logo_amsg_2025.png',
+      img: 'https://ams.net.technion.ac.il/files/2025/03/pic.jpeg',
       bio: 'Mahmoud is a M.Sc research student from the University of Politecnico di Torino in Italy, majoring in Electronics Engineering - Embedded Systems. He received his B.Sc degree in Electronics and Communication Engineering from Politecnico di Torino. He conducted a 6-month internship at The National Metrology Institute of Italy (INRiM) on the topic of Superconducting Single Photon Detectors. His current research interests are Computer Architecture, Neuromorphic Computing, Integrated Circuits and VLSI Systems.',
       contact: {
         Email: 'm-mahmoud@campus.technion.ac.il',
@@ -1699,7 +1778,7 @@ if (personModal) {
     dima: {
       name: 'Dima Ali Saleh',
       role: 'Graduate Researcher',
-      img: 'assets/img/logo_amsg_2025.png',
+      img: 'https://ams.net.technion.ac.il/files/2024/09/dima-768x768.jpg',
       bio: 'Dima received her B.Sc. in Electrical Engineering from the Technion and is currently a graduate student at AMSG, specializing in time-domain in-memory computing (TD‑IMC). Her research interests include advancements in mixed-signal integrated circuit design.',
       contact: {
         Email: 'dima.al@campus.technion.ac.il',
@@ -1715,10 +1794,48 @@ if (personModal) {
         'Focuses on mixed-signal integrated circuit advancements'
       ]
     },
+    maysam: {
+      name: 'Maysam Simaan',
+      role: 'Graduate Student',
+      img: 'assets/img/people/maysam_web.jpg',
+      bio: 'Maysam Simaan is an M.Sc. student at AMSG, Technion, and received a B.Sc. in Electrical Engineering from the Technion. Research interests include cryogenic hardware, the design of integrated circuits for extreme-environment computing, and time-domain in-memory computing (TD-IMC).',
+      contact: {
+        Email: 'si.maysam@campus.technion.ac.il',
+        Office: '406 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
+        Phone: ''
+      },
+      links: {
+        scholar: 'https://scholar.google.com',
+        linkedin: 'https://www.linkedin.com'
+      },
+      details: [
+        'Designs integrated circuits for cryogenic and extreme-environment computing',
+        'Works on time-domain in-memory computing (TD-IMC)'
+      ]
+    },
+    premsagar: {
+      name: 'Premsagar Dhote',
+      role: 'Exploratory Research Student',
+      img: 'assets/img/people/premsagar_web.jpg',
+      bio: 'Premsagar Dhote is an Exploratory Research student at the Andrew and Erna Viterbi Faculty of Electrical and Computer Engineering, Technion – Israel Institute of Technology. He received his M.Tech. degree from the National Institute of Technology Rourkela, India, in 2025, and his B.Tech. degree in Electrical and Electronics Engineering from Oriental Institute of Science and Technology, Bhopal, India, in 2023. Before joining Technion, he gained industry experience at Alphawave Semi (now Qualcomm) in UCIe die-to-die IP application engineering and post-silicon validation. His research interests include FeFET-based non-volatile memories, variability-aware device–circuit co-design, emerging memory technologies, high-speed interconnects, and energy-efficient AI hardware.',
+      contact: {
+        Email: 'premsagar.d@campus.technion.ac.il',
+        Office: '406 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
+        Phone: ''
+      },
+      links: {
+        scholar: 'https://scholar.google.com',
+        linkedin: 'https://www.linkedin.com'
+      },
+      details: [
+        'Researches FeFET-based non-volatile memories and emerging memory technologies',
+        'Brings industry experience in UCIe die-to-die IP and post-silicon validation'
+      ]
+    },
     sharon: {
       name: 'Sharon Ponarovsky',
       role: 'Graduate Researcher',
-      img: 'assets/img/logo_amsg_2025.png',
+      img: 'https://ams.net.technion.ac.il/files/2025/06/Photo673-2048x2048.jpg',
       bio: 'Sharon Ponarovsky received her B.Sc. degree in Electrical Engineering from the Technion - Israel Institute of Technology, in 2024. During her B.Sc. studies, Sharon joined the Wireless Communication Solutions chip development team at Intel as a Logic Design Student Engineer. She is currently an M.Sc. student at the Andrew and Erna Faculty of Electrical and Computer Engineering,  Technion. At AMSG,  Sharon\'s research focuses on utilizing analog and mixed signal circuits to implement highly energy efficient Spiking Neural Networks (SNNs).',
       contact: {
         Email: 'sharon@technion.ac.il',

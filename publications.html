@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Publications | AMSG</title>
@@ -8,12 +9,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="icon" href="https://ams.net.technion.ac.il/files/2025/11/logo_asmg_2025.png" type="image/png" />
+  <link rel="icon" href="assets/img/logo_asmg_2025.png" type="image/png" />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html"><img class="brand-logo" src="https://ams.net.technion.ac.il/files/2025/11/logo_asmg_2025.png" alt="AMSG logo" /><img class="technion-logo" src="assets/img/logo_technion.svg" alt="Technion logo" /><div class="brand-text">Analog/Mixed-Signal Research Group <span>Technion - Israel Institute of Technology</span></div></a>
+      <a class="brand" href="index.html"><img class="brand-logo" src="assets/img/logo_asmg_2025.png" alt="AMSG logo" /><img class="technion-logo" src="assets/img/logo_technion.svg" alt="Technion logo" /><div class="brand-text">Analog/Mixed-Signal Research Group <span>Technion - Israel Institute of Technology</span></div></a>
       <button class="nav-toggle" aria-label="Open menu">☰</button>
       <nav class="site-nav"><ul><li><a href="index.html">Home</a></li><li><a href="research.html">Research</a></li><li><a class="active" href="publications.html">Publications</a></li><li><a href="people.html">People</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
       <div class="header-tools" aria-label="Site tools">
@@ -55,9 +56,30 @@
         <div class="eyebrow reveal is-visible">Publications</div>
         <h1 class="section-title reveal is-visible" style="font-size:clamp(2.4rem,5vw,4rem);">Our Publications</h1>
        <div class="publication-nav reveal is-visible">
+          <a class="btn btn-secondary" href="#preprints">Preprints</a>
           <a class="btn btn-secondary" href="#journals">Journals</a>
           <a class="btn btn-secondary" href="#conferences">Conferences</a>
           <a class="btn btn-secondary" href="#talks">Talks</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="preprints" class="section compact">
+      <div class="container">
+        <div class="eyebrow reveal is-visible">Preprints</div>
+        <div class="grid">
+          <article class="card pub-item reveal">
+            <div class="year">2026</div>
+            <h3>Energy and Scaling Limits of Phase-Change Memory</h3>
+            <div class="authors">R.-G. Nir-Harwood, A. I. Khan, E. Ber, E. Ordan, K. Stern, K. L. Okabe, N. Wainstein, E. Yalon, and E. Pop</div>
+            <div class="venue">arXiv preprint arXiv:2605.28336, 2026</div>
+          </article>
+          <article class="card pub-item reveal delay-1">
+            <div class="year">2026</div>
+            <h3>A FeFET Voltage-to-Time Converter With Offset Trim by Programmed Multilevel State in 28-nm CMOS</h3>
+            <div class="authors">J. Mattar, H. Eqeiq, M. M. Dahan, S. Dünkel, H. Mulaosmanovic, S. Beyer, E. Yalon, and N. Wainstein</div>
+            <div class="venue">arXiv preprint, 2026</div>
+          </article>
         </div>
       </div>
     </section>
