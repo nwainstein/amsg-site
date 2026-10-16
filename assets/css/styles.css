@@ -617,6 +617,12 @@ body.a11y-high-contrast .a11y-controls .a11y-btn[aria-pressed="true"] {
   background-size: contain;
   background-color: #0b1626;
 }
+/* The logo is a solid black mark, so it needs its own light backdrop to stay
+   visible in the high-contrast theme, and breathing room inside the frame. */
+.hero-slide--logo {
+  background-size: min(56%, 340px) auto;
+  background-color: #f7f7f5;
+}
 .hero-overlay {
   z-index: 1;
   pointer-events: none;
