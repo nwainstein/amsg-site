@@ -567,9 +567,14 @@ body.a11y-high-contrast .a11y-controls .a11y-btn[aria-pressed="true"] {
   box-shadow: var(--shadow);
 }
 /* Home hero only: keep a stable 3:2 frame so the slides don't jump.
-   Scoped to .hero because research.html reuses .hero-visual full-width. */
+   Scoped to .hero because research.html reuses .hero-visual full-width.
+   min-height must be cleared: with width:auto in a grid track, a min-height
+   plus an aspect-ratio drives the WIDTH (420px x 3/2 = 630px), so the box
+   ignores its column and overflows the container. Width leads, height follows. */
 .hero .hero-visual {
   aspect-ratio: 3 / 2;
+  min-height: 0;
+  width: 100%;
 }
 .chip-gallery-slideshow {
   min-height: 340px;
