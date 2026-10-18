@@ -422,6 +422,7 @@ const createStaticSearchChunks = () => {
         GOES-East satellite images processing in Uruguay and future perspectives.
         Wireless image-sensor network application for population monitoring of lepidopterous insect pest in fruit crops.
         A Wireless Sensor Network Application with Distributed Processing in the Compressed Domain.
+        It’s Time to Use Time – Mixed-Signal In-Memory Computing for Energy-Efficient AI Hardware.
         Towards Energy-Efficient AI Hardware: Mixed-Signal In-Memory Computing and Ultra-Dense Die-to-Die Links.
         The Chiplet Revolution and its Challenges on Die-to-Die Interfaces.
         Memristor-based Reconfigurable Radiofrequency Circuits.
@@ -459,7 +460,7 @@ const createStaticSearchChunks = () => {
       pageHref: 'publications.html',
       pageTitle: 'Publications',
       title: 'Talks',
-      text: 'Talks on energy-efficient AI hardware, mixed-signal in-memory computing, die-to-die links, chiplets, phase transition properties in chalcogenides, memristor-based reconfigurable radiofrequency circuits, and analog and mixed-signal circuit design with memristors.',
+      text: 'Talks on energy-efficient AI hardware, mixed-signal in-memory computing, time-domain computing, die-to-die links, chiplets, phase transition properties in chalcogenides, memristor-based reconfigurable radiofrequency circuits, and analog and mixed-signal circuit design with memristors.',
       anchor: 'talks',
       kind: 'section'
     },
