@@ -402,7 +402,7 @@ const createStaticSearchChunks = () => {
         Preprints, journals, conferences, talks.
         Energy and Scaling Limits of Phase-Change Memory.
         A FeFET Voltage-to-Time Converter With Offset Trim by Programmed Multilevel State in 28-nm CMOS.
-        Reconfigurable Time-Domain In-Memory Computing Macro using CAM FeFET with Multilevel Delay Calibration in 28-nm CMOS.
+        A Reconfigurable Time-Domain In-Memory Computing Macro Using FeFET-Based CAM With Multilevel Delay Calibration in 28-nm CMOS.
         Fast-Locking and High-Resolution DLL with Binary Search and Clock Failure Detection for Wide Frequency Ranges in 3-nm FinFET CMOS.
         Emerging memory electronics for non-volatile radiofrequency switching technologies.
         Nanoscale temperature sensing of electronic devices with calibrated scanning thermal microscopy.
