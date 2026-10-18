@@ -46,6 +46,20 @@ const updateTechnionLogo = () => {
 
 updateTechnionLogo();
 
+/* Cards that open a modal are <article> elements with a click handler, so they
+   were unreachable by keyboard. Expose them as buttons and accept Enter/Space. */
+const makeCardActivatable = (card, onActivate) => {
+  card.addEventListener('click', onActivate);
+  if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '0');
+  if (!card.hasAttribute('role')) card.setAttribute('role', 'button');
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
+      event.preventDefault();
+      onActivate();
+    }
+  });
+};
+
 const SITE_SEARCH_PAGES = [
   {
     href: 'index.html',
@@ -1970,8 +1984,9 @@ if (personModal) {
     document.body.style.overflow = '';
   };
 
+
   document.querySelectorAll('[data-person-id]').forEach(card => {
-    card.addEventListener('click', () => openPersonModal(card.dataset.personId, card));
+    makeCardActivatable(card, () => openPersonModal(card.dataset.personId, card));
   });
 
   personModal.addEventListener('click', (event) => {
@@ -2053,7 +2068,7 @@ if (topicModal) {
   };
 
   document.querySelectorAll('[data-topic-id]').forEach(card => {
-    card.addEventListener('click', () => openTopicModal(card.dataset.topicId));
+    makeCardActivatable(card, () => openTopicModal(card.dataset.topicId));
   });
 
   topicModal.addEventListener('click', (event) => {
@@ -2201,7 +2216,7 @@ if (projectModal) {
   };
 
   document.querySelectorAll('[data-project-id]').forEach(card => {
-    card.addEventListener('click', () => openProjectModal(card.dataset.projectId));
+    makeCardActivatable(card, () => openProjectModal(card.dataset.projectId));
   });
 
   projectModal.addEventListener('click', (event) => {
@@ -2286,7 +2301,7 @@ if (newsModal) {
   };
 
   document.querySelectorAll('[data-news-id]').forEach(card => {
-    card.addEventListener('click', () => openNewsModal(card.dataset.newsId));
+    makeCardActivatable(card, () => openNewsModal(card.dataset.newsId));
   });
 
   newsModal.addEventListener('click', (event) => {
