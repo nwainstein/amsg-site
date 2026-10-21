@@ -483,9 +483,10 @@ const createStaticSearchChunks = () => {
       pageTitle: 'People',
       title: 'People',
       text: `
-        Meet the AMSG Team. Principal investigator, research staff, current students, former students.
+        Meet the AMSG Team. Principal investigator, research staff, current students, interns.
         Nicolas Wainstein, Ilana Zilberger, Michael Sotman, Doron Orenstein, Jeries Mattar, Dima Saleh,
-        Sharon Ponarovsky, Yousef Safadi, Ofir Glick, Yinon Geva, Daniel Komenetsky, Mahmoud Mahajna.
+        Sharon Ponarovsky, Yousef Safadi, Ofir Glick, Yinon Geva, Daniel Komenetsky, Maysam Simaan,
+        Premsagar Dhote, Mahmoud Mahajna, Roman Muchnyk.
       `,
       kind: 'page'
     },
@@ -570,7 +571,28 @@ const createStaticSearchChunks = () => {
       pageHref: 'people.html',
       pageTitle: 'People',
       title: 'Mahmoud Mahajna',
-      text: 'Graduate Student. Embedded systems, neuromorphic hardware, and integrated circuits.',
+      text: 'Intern. NEMO consortium project; embedded systems, neuromorphic hardware, and integrated circuits.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Roman Muchnyk',
+      text: 'Intern. NEMO consortium project.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Maysam Simaan',
+      text: 'Graduate Student. Cryogenic hardware and time-domain in-memory computing.',
+      kind: 'detail'
+    },
+    {
+      pageHref: 'people.html',
+      pageTitle: 'People',
+      title: 'Premsagar Dhote',
+      text: 'Exploratory Research Student. FeFET-based non-volatile memories and high-speed interconnects.',
       kind: 'detail'
     },
     {
@@ -1339,7 +1361,7 @@ if (teamCarousel) {
     {
       name: 'Dima Saleh',
       role: 'Graduate Student',
-      image: 'https://ams.net.technion.ac.il/files/2024/09/dima-768x768.jpg'
+      image: 'assets/img/people/dima_web.jpg'
     },
     {
       name: 'Sharon Ponarovsky',
@@ -1354,7 +1376,7 @@ if (teamCarousel) {
     {
       name: 'Ofir Glick',
       role: 'Graduate Student',
-      image: 'https://ams.net.technion.ac.il/files/2025/03/%D7%AA%D7%9E%D7%95%D7%A0%D7%AA-%D7%A4%D7%A0%D7%99%D7%9D-581x1024.png'
+      image: 'assets/img/people/ofir_web.jpg'
     },
     {
       name: 'Yinon Geva',
@@ -1716,7 +1738,7 @@ if (personModal) {
     ofir: {
       name: 'Ofir Glick',
       role: 'Graduate Researcher',
-      img: 'https://ams.net.technion.ac.il/files/2025/03/%D7%AA%D7%9E%D7%95%D7%A0%D7%AA-%D7%A4%D7%A0%D7%99%D7%9D-581x1024.png',
+      img: 'assets/img/people/ofir_web.jpg',
       bio: 'Ofir received his B.Sc. in Electrical Engineering from the Technion in 2024 and is currently an M.Sc. student working with Prof. Ariel Cohen and Dr. Nicolás Wainstein. He was previously an analog circuit designer at Cisco focusing on high-speed, low-power ADCs with digital calibration and mixed-signal verification.',
       contact: {
         Email: 'ofirglick@campus.technion.ac.il',
@@ -1773,9 +1795,9 @@ if (personModal) {
     },
     mahmoud: {
       name: 'Mahmoud Mahajna',
-      role: 'Graduate Researcher',
-      img: 'https://ams.net.technion.ac.il/files/2025/03/pic.jpeg',
-      bio: 'Mahmoud is a M.Sc research student from the University of Politecnico di Torino in Italy, majoring in Electronics Engineering - Embedded Systems. He received his B.Sc degree in Electronics and Communication Engineering from Politecnico di Torino. He conducted a 6-month internship at The National Metrology Institute of Italy (INRiM) on the topic of Superconducting Single Photon Detectors. His current research interests are Computer Architecture, Neuromorphic Computing, Integrated Circuits and VLSI Systems.',
+      role: 'Intern',
+      img: 'assets/img/people/mahmoud_web.jpg',
+      bio: 'Mahmoud is a M.Sc research student from the University of Politecnico di Torino in Italy, majoring in Electronics Engineering - Embedded Systems. He received his B.Sc degree in Electronics and Communication Engineering from Politecnico di Torino. He conducted a 6-month internship at The National Metrology Institute of Italy (INRiM) on the topic of Superconducting Single Photon Detectors. His current research interests are Computer Architecture, Neuromorphic Computing, Integrated Circuits and VLSI Systems. He is currently an intern at AMSG, working on the NEMO consortium project.',
       contact: {
         Email: 'm-mahmoud@campus.technion.ac.il',
         Office: '406 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
@@ -1790,10 +1812,28 @@ if (personModal) {
         'Bridges embedded systems research with circuit design' 
       ]
     },
+    roman: {
+      name: 'Roman Muchnyk',
+      role: 'Intern',
+      img: 'assets/img/logo_asmg_2025.png',
+      bio: 'Roman is an intern at AMSG, working on the NEMO consortium project.',
+      contact: {
+        Email: '',
+        Office: '406 Zisapel, Andrew and Erna Faculty of Electrical and Computer Engineering, Technion',
+        Phone: ''
+      },
+      links: {
+        scholar: 'https://scholar.google.com',
+        linkedin: 'https://www.linkedin.com'
+      },
+      details: [
+        'Works on the NEMO consortium project'
+      ]
+    },
     dima: {
       name: 'Dima Ali Saleh',
       role: 'Graduate Researcher',
-      img: 'https://ams.net.technion.ac.il/files/2024/09/dima-768x768.jpg',
+      img: 'assets/img/people/dima_web.jpg',
       bio: 'Dima received her B.Sc. in Electrical Engineering from the Technion and is currently a graduate student at AMSG, specializing in time-domain in-memory computing (TD‑IMC). Her research interests include advancements in mixed-signal integrated circuit design.',
       contact: {
         Email: 'dima.al@campus.technion.ac.il',
