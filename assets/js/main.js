@@ -251,7 +251,7 @@ const createStaticSearchChunks = () => {
         Analog Mixed Signal Research Group at the Technion. Device-to-system approach, energy-efficient AI hardware,
         experimental focus, research vision, analog and mixed-signal computing, in-memory computing, short-reach high-speed interconnects,
         cross-layer methodology, research grounded in silicon, energy-efficient AI hardware, meet our team, latest news from AMSG,
-        recent publications snapshot, join the group, circuits, AI hardware, wireline links.
+        recent publications snapshot, join the group, circuits, AI hardware, wireline links, cryogenic CMOS, data converters, clocking.
       `,
       kind: 'page'
     },
