@@ -261,10 +261,18 @@ const createStaticSearchChunks = () => {
       title: 'Research',
       text: `
         Advancing next-generation AI hardware by bridging device, circuit, and system innovations.
-        In-Memory Computing, AI Hardware Accelerators, Data Converters, Clock Generation Circuits, Ultra-Dense D2D and C2C Links,
+        In-Memory Computing, AI Hardware Accelerators, Data Converters, Clock Generation Circuits, Ultra-Dense D2D and C2C Links, Cryogenic CMOS,
         undergraduate project opportunities, core AMS foundations, chip gallery.
       `,
       kind: 'page'
+    },
+    {
+      pageHref: 'research.html',
+      pageTitle: 'Research',
+      title: 'Cryogenic CMOS',
+      text: 'Cryogenic CMOS circuit design and characterization. Scaling and noise limits of AMS circuits at low temperatures. Cryo-CMOS, cryogenic electronics, low-temperature circuit design.',
+      anchor: 'research-areas',
+      kind: 'detail'
     },
     {
       pageHref: 'research.html',
@@ -2070,6 +2078,12 @@ if (topicModal) {
     'clock-generation': {
       title: 'Clock Generation Circuits',
       body: 'Timing-generation and synchronization circuits for mixed-signal, compute, and high-speed link applications. Research focuses on robust clock synthesis, alignment, and distribution techniques that sustain performance under jitter, mismatch, and PVT variability. Core directions include PLL/DLL-based clock synthesis and timing recovery, multi-phase generation with phase alignment and deskew, and low-jitter design with calibration and implementation robustness.',
+      learnMoreHref: 'publications.html',
+      learnMoreLabel: 'Learn more'
+    },
+    'cryo-cmos': {
+      title: 'Cryogenic CMOS',
+      body: 'Analog and mixed-signal circuits designed to operate at cryogenic temperatures, where device behavior departs from its room-temperature models and the noise floor shifts. Research spans circuit design and measurement in the cold, and the limits that follow from it. Focus areas include cryogenic CMOS circuit design and characterization, and the scaling and noise limits of analog/mixed-signal circuits at low temperatures.',
       learnMoreHref: 'publications.html',
       learnMoreLabel: 'Learn more'
     },

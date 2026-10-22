@@ -209,16 +209,18 @@ img { max-width: 100%; display: block; }
    wide cards instead of leaving a dead cell next to the fifth. */
 .research-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 .research-grid > .card { grid-column: span 2; }
-.research-grid > .card:nth-last-child(2),
-.research-grid > .card:last-child { grid-column: span 3; }
+/* Only widen the final row when there are exactly five cards; with six
+   they tile as 3 + 3 on their own. */
+.research-grid > .card:nth-child(4):nth-last-child(2),
+.research-grid > .card:nth-child(5):nth-last-child(1) { grid-column: span 3; }
 .research-grid .card p,
 .research-grid .card li { max-width: 66ch; }
 
 @media (max-width: 1100px) {
   .research-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .research-grid > .card,
-  .research-grid > .card:nth-last-child(2) { grid-column: span 1; }
-  .research-grid > .card:last-child { grid-column: span 2; }
+  .research-grid > .card:nth-child(4):nth-last-child(2) { grid-column: span 1; }
+  .research-grid > .card:nth-child(5):nth-last-child(1) { grid-column: span 2; }
 }
 @media (max-width: 760px) {
   .research-grid { grid-template-columns: 1fr; }
