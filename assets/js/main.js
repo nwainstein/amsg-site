@@ -458,7 +458,7 @@ const createStaticSearchChunks = () => {
       pageHref: 'publications.html',
       pageTitle: 'Publications',
       title: 'Preprints',
-      text: 'Preprints on arXiv covering phase-change memory energy and scaling limits, and FeFET voltage-to-time converters with multilevel offset trim in 28 nm CMOS.',
+      text: 'Preprints on arXiv covering phase-change memory energy and scaling limits, FeFET voltage-to-time converters with multilevel offset trim in 28 nm CMOS, and power scaling across link utilization with GPAM-4 signaling and event-driven reception.',
       anchor: 'preprints',
       kind: 'section'
     },
@@ -1087,6 +1087,34 @@ if (year) year.textContent = new Date().getFullYear();
 
 const NEWS_ITEMS = [
   {
+    id: 'group-event-hula-valley-2026',
+    eyebrow: 'Group Event',
+    title: '15/11/2026 - AMSG Group Event in the Hula Valley',
+    summary: 'On Sunday, November 15, the group spent the day in the Hula Valley, riding bikes through the reserve and finishing with lunch together.',
+    details: [
+      'On Sunday, November 15, 2026, AMSG spent the day together in the Hula Valley.',
+      'We rode bikes through the reserve, enjoyed the views and the weather, and finished the day over a long lunch.',
+      'A great day out, and a good reminder that the group is more than the lab.'
+    ],
+    images: [
+      'assets/img/events/group_event_nov_2026/groupevent_nov_0.jpeg',
+      'assets/img/events/group_event_nov_2026/groupevent_nov_1.jpeg',
+      'assets/img/events/group_event_nov_2026/groupevent_nov_2.jpeg',
+      'assets/img/events/group_event_nov_2026/groupevent_nov_3.jpeg'
+    ]
+  },
+  {
+    id: 'jeries-che-scholarship',
+    eyebrow: 'Award',
+    title: 'Jeries Awarded a Council for Higher Education Scholarship',
+    summary: 'Congratulations to Jeries Mattar, who was awarded a scholarship from the Council for Higher Education.',
+    details: [
+      'Congratulations to Jeries Mattar, who was awarded a scholarship from the Council for Higher Education.',
+      'Well deserved, Jeries!'
+    ],
+    images: []
+  },
+  {
     id: 'nvmts-2026-tokyo-poster',
     eyebrow: 'Conference Presentation',
     title: '14/10/2026 - Jeries Presented at IEEE NVMTS 2026 in Tokyo',
@@ -1296,9 +1324,9 @@ const NEWS_ITEMS = [
 
 const NEWS_ITEMS_MAP = Object.fromEntries(NEWS_ITEMS.map((item) => [item.id, item]));
 const INDEX_NEWS_PREVIEW_IDS = [
-  'nvmts-2026-tokyo-poster',
-  'iia-applied-research-d2d-grant',
-  'dima-best-ta-award'
+  'group-event-hula-valley-2026',
+  'jeries-che-scholarship',
+  'nvmts-2026-tokyo-poster'
 ];
 const INDEX_NEWS_PREVIEW_ITEMS = INDEX_NEWS_PREVIEW_IDS
   .map((id) => NEWS_ITEMS_MAP[id])
