@@ -916,6 +916,36 @@ main > section:nth-of-type(even) {
   object-position: center 22%;
   display: block;
 }
+/* Portraits come from very mixed sources (conference snapshots, studio
+   headshots, phone photos). Desaturating them unifies the grid; hovering or
+   focusing a card brings that one portrait back to full colour. */
+.people-card .avatar img {
+  filter: grayscale(0.85);
+  transition: filter 260ms ease;
+}
+
+.people-card:hover .avatar img,
+.people-card:focus-visible .avatar img,
+.people-card:focus-within .avatar img {
+  filter: grayscale(0);
+}
+
+/* Touch devices have no hover state, so the portraits would stay grey for
+   good. Show them in colour there instead. */
+@media (hover: none) {
+  .people-card .avatar img,
+  .people-card:hover .avatar img {
+    filter: none;
+  }
+}
+
+/* High-contrast mode is for low vision: desaturating faces removes
+   information, so the portraits keep their colour. */
+body.a11y-high-contrast .people-card .avatar img,
+body.a11y-high-contrast .people-card:hover .avatar img {
+  filter: none;
+}
+
 .role { color: var(--muted); font-weight: 600; font-size: 0.95rem; }
 .person-meta { color: var(--muted); font-size: 0.94rem; }
 
