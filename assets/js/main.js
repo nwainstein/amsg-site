@@ -1146,7 +1146,10 @@ const NEWS_ITEMS = [
       'Congratulations to Dima Saleh, who received the Best TA Award in recognition of her outstanding teaching contribution.',
       'Well deserved, Dima!'
     ],
-    images: []
+    images: [
+      'assets/img/events/dima_ta_2026/dima_ta_0.jpeg',
+      'assets/img/events/dima_ta_2026/dima_ta_1.jpeg'
+    ]
   },
   {
     id: 'four-new-chip-designs-taped-out-week',
